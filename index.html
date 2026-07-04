@@ -455,9 +455,26 @@
   </div>
 </div>
 <div class="toast" id="toast"></div>
-
-<script>
-/* ---------- توليد صور SVG خفيفة بدل الصور الأصلية الضخمة ---------- */
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, setDoc, deleteDoc, doc,
+  onSnapshot, query, orderBy, getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+ 
+const firebaseConfig = {
+  apiKey: "AIzaSyCbupJ1RmCvy_qpdUP-_EF0crvEuqxmrHY",
+  authDomain: "dentcraft2026.firebaseapp.com",
+  projectId: "dentcraft2026",
+  storageBucket: "dentcraft2026.firebasestorage.app",
+  messagingSenderId: "739393846233",
+  appId: "1:739393846233:web:cd14b3fcd97bfaff77b7c8"
+};
+ 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const productsCol = collection(db, "products");
+ 
 function ph(c1,c2,icon){
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
     <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -468,44 +485,23 @@ function ph(c1,c2,icon){
   </svg>`;
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
-
+ 
 const DEFAULT_PRODUCTS = [
-  {id:'hook', name:'هوك أبيكس (Apex Hook)', price:'17 ج', desc:'خطاف دقيق لقياس طول القناة الجذرية أثناء علاج العصب، استانلس ستيل مقاوم للصدأ.', img: ph('#FF6B6B','#FFC93C','🪝')},
-  {id:'mirror', name:'مرايا تصوير (منفردة)', price:'45 ج', desc:'مرايا عاكسة لتصوير الأسنان داخل الفم بزوايا مختلفة، سطح مصقول بدرجة عالية.', img: ph('#00C2A8','#7C5CFC','🪞')},
-  {id:'mirror_set', name:'طقم مرايا كامل', price:'135 ج', desc:'مجموعة متكاملة من مرايا التصوير داخل شنطة جلد أنيقة، مرتبة وجاهزة للاستخدام اليومي.', img: ph('#7C5CFC','#FF8FB1','🧰')},
-  {id:'scaler', name:'مفتاح سكيلر (Scaler Key)', price:'60 ج', desc:'مفتاح ضبط رأس جهاز السكيلر، معتمد للتعقيم حتى 134°C.', img: ph('#FFC93C','#FF6B6B','🔧')},
-  {id:'template', name:'تمبلت قياس الأسنان', price:'5 ج', desc:'قالب لتحديد مواضع الأسنان العلوية والسفلية بدقة أثناء التخطيط للعلاج.', img: ph('#00C2A8','#FFC93C','📐')},
-  {id:'medal', name:'ميدالية كي تشين مخصصة', price:'25 / 15 ج', desc:'ميدالية بشكل السن، تُحفر باسم العيادة أو الشركة حسب الطلب. استانلس 25 ج، بلاستيك 15 ج.', img: ph('#FF8FB1','#7C5CFC','🦷')},
-  {id:'ruler', name:'مسطرة قياس الأسنان (mm)', price:'27 ج', desc:'مسطرة استانلس مدرّجة بالميليمتر لقياس أبعاد الأسنان والتيجان بدقة.', img: ph('#FF6B6B','#00C2A8','📏')}
+  {name:'ظ‡ظˆظƒ ط£ط¨ظٹظƒط³ (Apex Hook)', price:'17 ط¬', desc:'ط®ط·ط§ظپ ط¯ظ‚ظٹظ‚ ظ„ظ‚ظٹط§ط³ ط·ظˆظ„ ط§ظ„ظ‚ظ†ط§ط© ط§ظ„ط¬ط°ط±ظٹط© ط£ط«ظ†ط§ط، ط¹ظ„ط§ط¬ ط§ظ„ط¹طµط¨طŒ ط§ط³طھط§ظ†ظ„ط³ ط³طھظٹظ„ ظ…ظ‚ط§ظˆظ… ظ„ظ„طµط¯ط£.', img: ph('#FF6B6B','#FFC93C','ًںھ‌'), order:0},
+  {name:'ظ…ط±ط§ظٹط§ طھطµظˆظٹط± (ظ…ظ†ظپط±ط¯ط©)', price:'45 ط¬', desc:'ظ…ط±ط§ظٹط§ ط¹ط§ظƒط³ط© ظ„طھطµظˆظٹط± ط§ظ„ط£ط³ظ†ط§ظ† ط¯ط§ط®ظ„ ط§ظ„ظپظ… ط¨ط²ظˆط§ظٹط§ ظ…ط®طھظ„ظپط©طŒ ط³ط·ط­ ظ…طµظ‚ظˆظ„ ط¨ط¯ط±ط¬ط© ط¹ط§ظ„ظٹط©.', img: ph('#00C2A8','#7C5CFC','ًںھ‍'), order:1},
+  {name:'ط·ظ‚ظ… ظ…ط±ط§ظٹط§ ظƒط§ظ…ظ„', price:'135 ط¬', desc:'ظ…ط¬ظ…ظˆط¹ط© ظ…طھظƒط§ظ…ظ„ط© ظ…ظ† ظ…ط±ط§ظٹط§ ط§ظ„طھطµظˆظٹط± ط¯ط§ط®ظ„ ط´ظ†ط·ط© ط¬ظ„ط¯ ط£ظ†ظٹظ‚ط©طŒ ظ…ط±طھط¨ط© ظˆط¬ط§ظ‡ط²ط© ظ„ظ„ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظٹظˆظ…ظٹ.', img: ph('#7C5CFC','#FF8FB1','ًں§°'), order:2},
+  {name:'ظ…ظپطھط§ط­ ط³ظƒظٹظ„ط± (Scaler Key)', price:'60 ط¬', desc:'ظ…ظپطھط§ط­ ط¶ط¨ط· ط±ط£ط³ ط¬ظ‡ط§ط² ط§ظ„ط³ظƒظٹظ„ط±طŒ ظ…ط¹طھظ…ط¯ ظ„ظ„طھط¹ظ‚ظٹظ… ط­طھظ‰ 134آ°C.', img: ph('#FFC93C','#FF6B6B','ًں”§'), order:3},
+  {name:'طھظ…ط¨ظ„طھ ظ‚ظٹط§ط³ ط§ظ„ط£ط³ظ†ط§ظ†', price:'5 ط¬', desc:'ظ‚ط§ظ„ط¨ ظ„طھط­ط¯ظٹط¯ ظ…ظˆط§ط¶ط¹ ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط¹ظ„ظˆظٹط© ظˆط§ظ„ط³ظپظ„ظٹط© ط¨ط¯ظ‚ط© ط£ط«ظ†ط§ط، ط§ظ„طھط®ط·ظٹط· ظ„ظ„ط¹ظ„ط§ط¬.', img: ph('#00C2A8','#FFC93C','ًں“گ'), order:4},
+  {name:'ظ…ظٹط¯ط§ظ„ظٹط© ظƒظٹ طھط´ظٹظ† ظ…ط®طµطµط©', price:'25 / 15 ط¬', desc:'ظ…ظٹط¯ط§ظ„ظٹط© ط¨ط´ظƒظ„ ط§ظ„ط³ظ†طŒ طھظڈط­ظپط± ط¨ط§ط³ظ… ط§ظ„ط¹ظٹط§ط¯ط© ط£ظˆ ط§ظ„ط´ط±ظƒط© ط­ط³ط¨ ط§ظ„ط·ظ„ط¨. ط§ط³طھط§ظ†ظ„ط³ 25 ط¬طŒ ط¨ظ„ط§ط³طھظٹظƒ 15 ط¬.', img: ph('#FF8FB1','#7C5CFC','ًں¦·'), order:5},
+  {name:'ظ…ط³ط·ط±ط© ظ‚ظٹط§ط³ ط§ظ„ط£ط³ظ†ط§ظ† (mm)', price:'27 ط¬', desc:'ظ…ط³ط·ط±ط© ط§ط³طھط§ظ†ظ„ط³ ظ…ط¯ط±ظ‘ط¬ط© ط¨ط§ظ„ظ…ظٹظ„ظٹظ…طھط± ظ„ظ‚ظٹط§ط³ ط£ط¨ط¹ط§ط¯ ط§ظ„ط£ط³ظ†ط§ظ† ظˆط§ظ„طھظٹط¬ط§ظ† ط¨ط¯ظ‚ط©.', img: ph('#FF6B6B','#00C2A8','ًں“ڈ'), order:6}
 ];
-
-const STORAGE_KEY = 'dc_products_v3';
-const ADMIN_PASSWORD = 'dentcraft2026'; // غيّرها لكلمة سر خاصة بيك
-
-function loadProducts(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(raw){
-      const parsed = JSON.parse(raw);
-      if(Array.isArray(parsed)) return parsed;
-    }
-  }catch(e){}
- return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-}
-
-function saveProducts(products){
-  try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-    return true;
-  }catch(e){
-    console.error(e);
-    return false;
-  }
-}
-
-let PRODUCTS = loadProducts();
+ 
+const ADMIN_PASSWORD = 'dentcraft2026'; // ط؛ظٹظ‘ط±ظ‡ط§ ظ„ظƒظ„ظ…ط© ط³ط± ط®ط§طµط© ط¨ظٹظƒ
+const MAX_DOC_BYTES_APPROX = 700000; // ظ‡ط§ظ…ط´ ط£ظ…ط§ظ† طھط­طھ ط­ط¯ ط§ظ„ظ…ظٹط¬ط§ ط¨ط§ظٹطھ ظ„ظƒظ„ ظ…ط³طھظ†ط¯ ظپظٹ Firestore
+ 
+let PRODUCTS = [];
 let draft = null;
-
+ 
 function escapeHTML(str){
   return String(str ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
 }
@@ -514,150 +510,212 @@ function cardColor(i){
   const colors = ['#FF6B6B','#00C2A8','#FFC93C','#7C5CFC','#FF8FB1'];
   return colors[i % colors.length];
 }
-
-/* ---------- عرض الكروت في الصفحة الرئيسية ---------- */
+ 
+/* ---------- طھطµط؛ظٹط± ظˆط¶ط؛ط· ط§ظ„طµظˆط±ط© طھظ„ظ‚ط§ط¦ظٹظ‹ط§ ظ‚ط¨ظ„ ط§ظ„طھط­ظˆظٹظ„ ظ„ظ€ base64 ---------- */
+function resizeImageFile(file, maxDim = 700, quality = 0.72){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onload = e => { img.src = e.target.result; };
+    reader.onerror = reject;
+    img.onload = () => {
+      let { width, height } = img;
+      if(width > height && width > maxDim){
+        height = Math.round(height * (maxDim / width));
+        width = maxDim;
+      }else if(height > maxDim){
+        width = Math.round(width * (maxDim / height));
+        height = maxDim;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+ 
+async function seedIfEmpty(){
+  const snap = await getDocs(productsCol);
+  if(snap.empty){
+    for(const p of DEFAULT_PRODUCTS){
+      await addDoc(productsCol, p);
+    }
+  }
+}
+ 
+/* ---------- ط¹ط±ط¶ ط§ظ„ظƒط±ظˆطھ ظپظٹ ط§ظ„طµظپط­ط© ط§ظ„ط±ط¦ظٹط³ظٹط© ---------- */
 function renderGrid(){
   const grid = document.getElementById('productGrid');
   if(!PRODUCTS.length){
-    grid.innerHTML = '<p class="empty-msg">لا توجد منتجات معروضة حاليًا.</p>';
+    grid.innerHTML = '<p class="empty-msg">ظ„ط§ طھظˆط¬ط¯ ظ…ظ†طھط¬ط§طھ ظ…ط¹ط±ظˆط¶ط© ط­ط§ظ„ظٹظ‹ط§.</p>';
     return;
   }
   grid.innerHTML = PRODUCTS.map((p,i) => `
     <div class="card" style="--card-color:${cardColor(i)}">
       <div class="card-media">
         <span class="price-tag">${escapeHTML(p.price)}</span>
-        <img src="${p.img}" alt="${escapeAttr(p.name)}">
+        <img src="${p.img}" alt="${escapeAttr(p.name)}" loading="lazy">
       </div>
       <div class="card-body">
         <h3>${escapeHTML(p.name)}</h3>
         <p>${escapeHTML(p.desc)}</p>
         <div class="card-order">
-          <a class="order-link" href="https://wa.me/201282175854?text=${encodeURIComponent('عايز أطلب: '+p.name)}" target="_blank" rel="noopener">
+          <a class="order-link" href="https://wa.me/201282175854?text=${encodeURIComponent('ط¹ط§ظٹط² ط£ط·ظ„ط¨: '+p.name)}" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4C8.4 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-            اطلب الآن
+            ط§ط·ظ„ط¨ ط§ظ„ط¢ظ†
           </a>
         </div>
       </div>
     </div>
   `).join('');
 }
-
-/* ---------- لوحة التحكم ---------- */
+ 
+/* ---------- ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ---------- */
 function renderAdminList(){
   const list = document.getElementById('adminList');
   if(!draft.length){
-    list.innerHTML = '<p class="hint">لا توجد منتجات. اضغط "إضافة منتج جديد" للبدء.</p>';
+    list.innerHTML = '<p class="hint">ظ„ط§ طھظˆط¬ط¯ ظ…ظ†طھط¬ط§طھ. ط§ط¶ط؛ط· "ط¥ط¶ط§ظپط© ظ…ظ†طھط¬ ط¬ط¯ظٹط¯" ظ„ظ„ط¨ط¯ط،.</p>';
     return;
   }
   list.innerHTML = draft.map((p, idx) => `
     <div class="admin-row" data-idx="${idx}">
       <img class="admin-thumb" src="${p.img}">
       <div class="admin-fields">
-        <input type="text" class="af-name" data-idx="${idx}" data-field="name" value="${escapeAttr(p.name)}" placeholder="اسم المنتج">
-        <input type="text" class="af-price" data-idx="${idx}" data-field="price" value="${escapeAttr(p.price)}" placeholder="السعر (مثال: 45 ج)">
-        <textarea class="af-desc" data-idx="${idx}" data-field="desc" placeholder="الوصف">${escapeHTML(p.desc)}</textarea>
+        <input type="text" class="af-name" data-idx="${idx}" data-field="name" value="${escapeAttr(p.name)}" placeholder="ط§ط³ظ… ط§ظ„ظ…ظ†طھط¬">
+        <input type="text" class="af-price" data-idx="${idx}" data-field="price" value="${escapeAttr(p.price)}" placeholder="ط§ظ„ط³ط¹ط± (ظ…ط«ط§ظ„: 45 ط¬)">
+        <textarea class="af-desc" data-idx="${idx}" data-field="desc" placeholder="ط§ظ„ظˆطµظپ">${escapeHTML(p.desc)}</textarea>
         <label class="upload-btn">
-          🖼 تغيير الصورة
+          ًں–¼ طھط؛ظٹظٹط± ط§ظ„طµظˆط±ط©
           <input type="file" accept="image/*" class="af-img" data-idx="${idx}">
         </label>
       </div>
-      <button class="admin-delete" data-idx="${idx}" title="حذف المنتج">🗑</button>
+      <button class="admin-delete" data-idx="${idx}" title="ط­ط°ظپ ط§ظ„ظ…ظ†طھط¬">ًں—‘</button>
     </div>
   `).join('');
-
+ 
   list.querySelectorAll('.af-name, .af-price, .af-desc').forEach(inp => {
     inp.addEventListener('input', function(){
       draft[+this.dataset.idx][this.dataset.field] = this.value;
     });
   });
-
+ 
   list.querySelectorAll('.af-img').forEach(inp => {
-    inp.addEventListener('change', function(e){
+    inp.addEventListener('change', async function(e){
       const idx = +this.dataset.idx;
       const file = e.target.files[0];
       if(!file) return;
-      const reader = new FileReader();
-      reader.onload = ev => {
-        draft[idx].img = ev.target.result;
+      showToast('ط¬ط§ط±ظٹ طھطµط؛ظٹط± ط§ظ„طµظˆط±ط©...');
+      try{
+        const resizedDataUrl = await resizeImageFile(file);
+        draft[idx].img = resizedDataUrl;
         const row = list.querySelectorAll('.admin-row')[idx];
-        if(row) row.querySelector('.admin-thumb').src = ev.target.result;
-        showToast('تم تحديث الصورة، متنساش تضغط "حفظ" ✅');
-      };
-      reader.readAsDataURL(file);
-    });
-  });
-
-  list.querySelectorAll('.admin-delete').forEach(btn => {
-    btn.addEventListener('click', function(){
-      const idx = +this.dataset.idx;
-      if(confirm('متأكد إنك عايز تحذف "'+draft[idx].name+'"؟')){
-        draft.splice(idx,1);
-        renderAdminList();
+        if(row) row.querySelector('.admin-thumb').src = resizedDataUrl;
+        showToast('طھظ… طھط¬ظ‡ظٹط² ط§ظ„طµظˆط±ط©طŒ ظ…طھظ†ط³ط§ط´ طھط¶ط؛ط· "ط­ظپط¸" âœ…');
+      }catch(err){
+        console.error(err);
+        alert('طھط¹ط°ظ‘ط± ظ…ط¹ط§ظ„ط¬ط© ظ‡ط°ظ‡ ط§ظ„طµظˆط±ط©طŒ ط¬ط±ط¨ طµظˆط±ط© ط£ط®ط±ظ‰');
       }
     });
   });
+ 
+  list.querySelectorAll('.admin-delete').forEach(btn => {
+    btn.addEventListener('click', async function(){
+      const idx = +this.dataset.idx;
+      const p = draft[idx];
+      if(!confirm('ظ…طھط£ظƒط¯ ط¥ظ†ظƒ ط¹ط§ظٹط² طھط­ط°ظپ "'+p.name+'"طں')) return;
+      if(p.id){
+        try{ await deleteDoc(doc(db,'products',p.id)); }catch(e){ console.error(e); }
+      }
+      draft.splice(idx,1);
+      renderAdminList();
+      showToast('طھظ… ط­ط°ظپ ط§ظ„ظ…ظ†طھط¬');
+    });
+  });
 }
-
+ 
 function addNewProduct(){
   draft.push({
-    id: 'p_'+Date.now(),
-    name: 'منتج جديد',
-    price: '0 ج',
-    desc: 'اكتب وصف المنتج هنا...',
-    img: ph('#00C2A8','#FF6B6B','🆕')
+    name: 'ظ…ظ†طھط¬ ط¬ط¯ظٹط¯',
+    price: '0 ط¬',
+    desc: 'ط§ظƒطھط¨ ظˆطµظپ ط§ظ„ظ…ظ†طھط¬ ظ‡ظ†ط§...',
+    img: ph('#00C2A8','#FF6B6B','ًں†•'),
+    order: draft.length
   });
   renderAdminList();
   const list = document.getElementById('adminList');
   list.scrollTop = list.scrollHeight;
 }
-
-function saveAll(){
-  PRODUCTS = JSON.parse(JSON.stringify(draft));
-  const ok = saveProducts(PRODUCTS);
-  if(ok){
-    renderGrid();
-    showToast('تم حفظ كل التعديلات بنجاح ✅');
-  }else{
-    showToast('⚠️ فشل الحفظ — المساحة ممتلئة');
-    alert('المساحة المتاحة في المتصفح ممتلئة بسبب حجم الصور. قلل حجم/عدد الصور المرفوعة، أو صغّرها قبل الرفع، أو امسح منتجات قديمة.');
+ 
+async function saveAll(){
+  showToast('ط¬ط§ط±ظٹ ط§ظ„ط­ظپط¸...');
+  try{
+    for(let i=0;i<draft.length;i++){
+      const p = draft[i];
+      if(p.img && p.img.length > MAX_DOC_BYTES_APPROX){
+        showToast('âڑ ï¸ڈ طµظˆط±ط© "'+p.name+'" ظƒط¨ظٹط±ط© ط¬ط¯ظ‹ط§طŒ ط¬ط±ط¨ طµظˆط±ط© ط£طµط؛ط±');
+        alert('طµظˆط±ط© ط§ظ„ظ…ظ†طھط¬ "'+p.name+'" ظƒط¨ظٹط±ط© ط¬ط¯ظ‹ط§ ظˆظ…ظ…ظƒظ† طھظپط´ظ„ ط§ظ„ط­ظپط¸. ط¬ط±ط¨ طھط±ظپط¹ظ‡ط§ طھط§ظ†ظٹ (ط¨ظٹطھظ… طھطµط؛ظٹط±ظ‡ط§ طھظ„ظ‚ط§ط¦ظٹظ‹ط§) ط£ظˆ ط§ط³طھط®ط¯ظ… طµظˆط±ط© ط£ظ‚ظ„ ط¯ظ‚ط©.');
+        return;
+      }
+      const data = { name:p.name, price:p.price, desc:p.desc, img:p.img, order: i };
+      if(p.id){
+        await setDoc(doc(db,'products',p.id), data, {merge:true});
+      }else{
+        const newRef = await addDoc(productsCol, data);
+        p.id = newRef.id;
+      }
+    }
+    showToast('طھظ… ط­ظپط¸ ظƒظ„ ط§ظ„طھط¹ط¯ظٹظ„ط§طھ ط¨ظ†ط¬ط§ط­ âœ…');
+  }catch(e){
+    console.error(e);
+    showToast('âڑ ï¸ڈ ط­طµظ„ ط®ط·ط£ ط£ط«ظ†ط§ط، ط§ظ„ط­ظپط¸');
+    alert('ط­طµظ„ ط®ط·ط£ ط£ط«ظ†ط§ط، ط§ظ„ط­ظپط¸. طھط£ظƒط¯ ظ…ظ† ط§طھطµط§ظ„ظƒ ط¨ط§ظ„ط¥ظ†طھط±ظ†طھ ظˆظ…ظ† ظ‚ظˆط§ط¹ط¯ Firestore. ط±ط§ط¬ط¹ Console (F12) ظ„طھظپط§طµظٹظ„ ط§ظ„ط®ط·ط£.');
   }
 }
-
-function resetDefaults(){
-  if(!confirm('هيرجع كل حاجة للإعدادات الافتراضية وهيتم مسح تعديلاتك، متأكد؟')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-  draft = JSON.parse(JSON.stringify(PRODUCTS));
-  renderGrid();
-  renderAdminList();
-  showToast('تم استرجاع الإعدادات الافتراضية');
+ 
+async function resetDefaults(){
+  if(!confirm('ظ‡ظٹطھظ… ط­ط°ظپ ظƒظ„ ط§ظ„ظ…ظ†طھط¬ط§طھ ط§ظ„ط­ط§ظ„ظٹط© ظˆط§ط³طھط±ط¬ط§ط¹ ط§ظ„ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظپطھط±ط§ط¶ظٹط©طŒ ظ…طھط£ظƒط¯طں')) return;
+  showToast('ط¬ط§ط±ظٹ ط§ظ„ط§ط³طھط±ط¬ط§ط¹...');
+  try{
+    const snap = await getDocs(productsCol);
+    for(const d of snap.docs){ await deleteDoc(d.ref); }
+    for(const p of DEFAULT_PRODUCTS){ await addDoc(productsCol, p); }
+    showToast('طھظ… ط§ط³طھط±ط¬ط§ط¹ ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ ط§ظ„ط§ظپطھط±ط§ط¶ظٹط©');
+  }catch(e){
+    console.error(e);
+    showToast('âڑ ï¸ڈ ط­طµظ„ ط®ط·ط£');
+  }
 }
-
+ 
 function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(()=> t.classList.remove('show'), 2400);
 }
-
-/* ---------- فتح/غلق لوحة التحكم مع باسورد بسيط ---------- */
+ 
+/* ---------- ظپطھط­/ط؛ظ„ظ‚ ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ظ…ط¹ ط¨ط§ط³ظˆط±ط¯ ط¨ط³ظٹط· ---------- */
 let adminUnlocked = sessionStorage.getItem('dc_admin_ok') === '1';
-
-function openAdmin(){
-  draft = JSON.parse(JSON.stringify(PRODUCTS));
+ 
+async function openAdmin(){
+  const snap = await getDocs(query(productsCol, orderBy('order')));
+  draft = snap.docs.map(d => ({id:d.id, ...d.data()}));
   renderAdminList();
   document.getElementById('adminPanel').classList.add('open');
 }
 function closeAdmin(){
   document.getElementById('adminPanel').classList.remove('open');
 }
-
+ 
 document.getElementById('adminToggle').addEventListener('click', () => {
   if(!adminUnlocked){
-    const pass = prompt('من فضلك أدخل كلمة سر لوحة التحكم:');
+    const pass = prompt('ظ…ظ† ظپط¶ظ„ظƒ ط£ط¯ط®ظ„ ظƒظ„ظ…ط© ط³ط± ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ…:');
     if(pass === null) return;
     if(pass !== ADMIN_PASSWORD){
-      alert('كلمة السر غير صحيحة');
+      alert('ظƒظ„ظ…ط© ط§ظ„ط³ط± ط؛ظٹط± طµط­ظٹط­ط©');
       return;
     }
     adminUnlocked = true;
@@ -672,16 +730,16 @@ document.getElementById('adminPanel').addEventListener('click', (e)=>{
 document.getElementById('addProductBtn').addEventListener('click', addNewProduct);
 document.getElementById('saveAllBtn').addEventListener('click', saveAll);
 document.getElementById('resetBtn').addEventListener('click', resetDefaults);
-
+ 
 document.getElementById('exportJsonBtn').addEventListener('click', () => {
   const blob = new Blob([JSON.stringify(PRODUCTS, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = 'dentcraft-products-backup.json'; a.click();
   URL.revokeObjectURL(url);
-  showToast('جاري تنزيل النسخة الاحتياطية...');
+  showToast('ط¬ط§ط±ظٹ طھظ†ط²ظٹظ„ ط§ظ„ظ†ط³ط®ط© ط§ظ„ط§ط­طھظٹط§ط·ظٹط©...');
 });
-
+ 
 document.getElementById('importFile').addEventListener('change', function(e){
   const file = e.target.files[0];
   if(!file) return;
@@ -690,23 +748,28 @@ document.getElementById('importFile').addEventListener('change', function(e){
     try{
       const parsed = JSON.parse(ev.target.result);
       if(Array.isArray(parsed)){
-        draft = parsed;
+        draft = parsed.map(p => ({...p}));
         renderAdminList();
-        showToast('تم الاستيراد، اضغط "حفظ" لتفعيل البيانات');
+        showToast('طھظ… ط§ظ„ط§ط³طھظٹط±ط§ط¯طŒ ط§ط¶ط؛ط· "ط­ظپط¸" ظ„طھظپط¹ظٹظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ');
       }else{
-        alert('ملف غير صالح');
+        alert('ظ…ظ„ظپ ط؛ظٹط± طµط§ظ„ط­');
       }
     }catch(err){
-      alert('تعذّر قراءة الملف، تأكد إنه ملف JSON صحيح');
+      alert('طھط¹ط°ظ‘ط± ظ‚ط±ط§ط،ط© ط§ظ„ظ…ظ„ظپطŒ طھط£ظƒط¯ ط¥ظ†ظ‡ ظ…ظ„ظپ JSON طµط­ظٹط­');
     }
   };
   reader.readAsText(file);
   this.value = '';
 });
-
-/* ---------- تشغيل أولي ---------- */
-renderGrid();
+ 
+/* ---------- طھط´ط؛ظٹظ„ ط£ظˆظ„ظٹ ---------- */
+(async function init(){
+  await seedIfEmpty();
+  onSnapshot(query(productsCol, orderBy('order')), snap => {
+    PRODUCTS = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    renderGrid();
+  });
+})();
 </script>
 
-</body>
-</html>
+
