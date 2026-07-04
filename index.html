@@ -491,9 +491,14 @@ function loadProducts(){
     }
   }catch(e){}
   return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
-}
 function saveProducts(products){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    return true;
+  }catch(e){
+    console.error(e);
+    return false;
+  }
 }
 
 let PRODUCTS = loadProducts();
@@ -606,9 +611,14 @@ function addNewProduct(){
 
 function saveAll(){
   PRODUCTS = JSON.parse(JSON.stringify(draft));
-  saveProducts(PRODUCTS);
-  renderGrid();
-  showToast('تم حفظ كل التعديلات بنجاح ✅');
+  const ok = saveProducts(PRODUCTS);
+  if(ok){
+    renderGrid();
+    showToast('تم حفظ كل التعديلات بنجاح ✅');
+  }else{
+    showToast('⚠️ فشل الحفظ — المساحة ممتلئة');
+    alert('المساحة المتاحة في المتصفح ممتلئة بسبب حجم الصور. قلل حجم/عدد الصور المرفوعة، أو صغّرها قبل الرفع، أو امسح منتجات قديمة.');
+  }
 }
 
 function resetDefaults(){
