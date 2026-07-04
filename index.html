@@ -487,17 +487,17 @@ function ph(c1,c2,icon){
 }
  
 const DEFAULT_PRODUCTS = [
-  {name:'ظ‡ظˆظƒ ط£ط¨ظٹظƒط³ (Apex Hook)', price:'17 ط¬', desc:'ط®ط·ط§ظپ ط¯ظ‚ظٹظ‚ ظ„ظ‚ظٹط§ط³ ط·ظˆظ„ ط§ظ„ظ‚ظ†ط§ط© ط§ظ„ط¬ط°ط±ظٹط© ط£ط«ظ†ط§ط، ط¹ظ„ط§ط¬ ط§ظ„ط¹طµط¨طŒ ط§ط³طھط§ظ†ظ„ط³ ط³طھظٹظ„ ظ…ظ‚ط§ظˆظ… ظ„ظ„طµط¯ط£.', img: ph('#FF6B6B','#FFC93C','ًںھ‌'), order:0},
-  {name:'ظ…ط±ط§ظٹط§ طھطµظˆظٹط± (ظ…ظ†ظپط±ط¯ط©)', price:'45 ط¬', desc:'ظ…ط±ط§ظٹط§ ط¹ط§ظƒط³ط© ظ„طھطµظˆظٹط± ط§ظ„ط£ط³ظ†ط§ظ† ط¯ط§ط®ظ„ ط§ظ„ظپظ… ط¨ط²ظˆط§ظٹط§ ظ…ط®طھظ„ظپط©طŒ ط³ط·ط­ ظ…طµظ‚ظˆظ„ ط¨ط¯ط±ط¬ط© ط¹ط§ظ„ظٹط©.', img: ph('#00C2A8','#7C5CFC','ًںھ‍'), order:1},
-  {name:'ط·ظ‚ظ… ظ…ط±ط§ظٹط§ ظƒط§ظ…ظ„', price:'135 ط¬', desc:'ظ…ط¬ظ…ظˆط¹ط© ظ…طھظƒط§ظ…ظ„ط© ظ…ظ† ظ…ط±ط§ظٹط§ ط§ظ„طھطµظˆظٹط± ط¯ط§ط®ظ„ ط´ظ†ط·ط© ط¬ظ„ط¯ ط£ظ†ظٹظ‚ط©طŒ ظ…ط±طھط¨ط© ظˆط¬ط§ظ‡ط²ط© ظ„ظ„ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظٹظˆظ…ظٹ.', img: ph('#7C5CFC','#FF8FB1','ًں§°'), order:2},
-  {name:'ظ…ظپطھط§ط­ ط³ظƒظٹظ„ط± (Scaler Key)', price:'60 ط¬', desc:'ظ…ظپطھط§ط­ ط¶ط¨ط· ط±ط£ط³ ط¬ظ‡ط§ط² ط§ظ„ط³ظƒظٹظ„ط±طŒ ظ…ط¹طھظ…ط¯ ظ„ظ„طھط¹ظ‚ظٹظ… ط­طھظ‰ 134آ°C.', img: ph('#FFC93C','#FF6B6B','ًں”§'), order:3},
-  {name:'طھظ…ط¨ظ„طھ ظ‚ظٹط§ط³ ط§ظ„ط£ط³ظ†ط§ظ†', price:'5 ط¬', desc:'ظ‚ط§ظ„ط¨ ظ„طھط­ط¯ظٹط¯ ظ…ظˆط§ط¶ط¹ ط§ظ„ط£ط³ظ†ط§ظ† ط§ظ„ط¹ظ„ظˆظٹط© ظˆط§ظ„ط³ظپظ„ظٹط© ط¨ط¯ظ‚ط© ط£ط«ظ†ط§ط، ط§ظ„طھط®ط·ظٹط· ظ„ظ„ط¹ظ„ط§ط¬.', img: ph('#00C2A8','#FFC93C','ًں“گ'), order:4},
-  {name:'ظ…ظٹط¯ط§ظ„ظٹط© ظƒظٹ طھط´ظٹظ† ظ…ط®طµطµط©', price:'25 / 15 ط¬', desc:'ظ…ظٹط¯ط§ظ„ظٹط© ط¨ط´ظƒظ„ ط§ظ„ط³ظ†طŒ طھظڈط­ظپط± ط¨ط§ط³ظ… ط§ظ„ط¹ظٹط§ط¯ط© ط£ظˆ ط§ظ„ط´ط±ظƒط© ط­ط³ط¨ ط§ظ„ط·ظ„ط¨. ط§ط³طھط§ظ†ظ„ط³ 25 ط¬طŒ ط¨ظ„ط§ط³طھظٹظƒ 15 ط¬.', img: ph('#FF8FB1','#7C5CFC','ًں¦·'), order:5},
-  {name:'ظ…ط³ط·ط±ط© ظ‚ظٹط§ط³ ط§ظ„ط£ط³ظ†ط§ظ† (mm)', price:'27 ط¬', desc:'ظ…ط³ط·ط±ط© ط§ط³طھط§ظ†ظ„ط³ ظ…ط¯ط±ظ‘ط¬ط© ط¨ط§ظ„ظ…ظٹظ„ظٹظ…طھط± ظ„ظ‚ظٹط§ط³ ط£ط¨ط¹ط§ط¯ ط§ظ„ط£ط³ظ†ط§ظ† ظˆط§ظ„طھظٹط¬ط§ظ† ط¨ط¯ظ‚ط©.', img: ph('#FF6B6B','#00C2A8','ًں“ڈ'), order:6}
+  {name:'\u0647\u0648\u0643 \u0623\u0628\u064a\u0643\u0633 (Apex Hook)', price:'17 \u062c', desc:'\u062e\u0637\u0627\u0641 \u062f\u0642\u064a\u0642 \u0644\u0642\u064a\u0627\u0633 \u0637\u0648\u0644 \u0627\u0644\u0642\u0646\u0627\u0629 \u0627\u0644\u062c\u0630\u0631\u064a\u0629 \u0623\u062b\u0646\u0627\u0621 \u0639\u0644\u0627\u062c \u0627\u0644\u0639\u0635\u0628\u060c \u0627\u0633\u062a\u0627\u0646\u0644\u0633 \u0633\u062a\u064a\u0644 \u0645\u0642\u0627\u0648\u0645 \u0644\u0644\u0635\u062f\u0623.', img: ph('#FF6B6B','#FFC93C','\ud83e\ude9d'), order:0},
+  {name:'\u0645\u0631\u0627\u064a\u0627 \u062a\u0635\u0648\u064a\u0631 (\u0645\u0646\u0641\u0631\u062f\u0629)', price:'45 \u062c', desc:'\u0645\u0631\u0627\u064a\u0627 \u0639\u0627\u0643\u0633\u0629 \u0644\u062a\u0635\u0648\u064a\u0631 \u0627\u0644\u0623\u0633\u0646\u0627\u0646 \u062f\u0627\u062e\u0644 \u0627\u0644\u0641\u0645 \u0628\u0632\u0648\u0627\u064a\u0627 \u0645\u062e\u062a\u0644\u0641\u0629\u060c \u0633\u0637\u062d \u0645\u0635\u0642\u0648\u0644 \u0628\u062f\u0631\u062c\u0629 \u0639\u0627\u0644\u064a\u0629.', img: ph('#00C2A8','#7C5CFC','\ud83e\ude9e'), order:1},
+  {name:'\u0637\u0642\u0645 \u0645\u0631\u0627\u064a\u0627 \u0643\u0627\u0645\u0644', price:'135 \u062c', desc:'\u0645\u062c\u0645\u0648\u0639\u0629 \u0645\u062a\u0643\u0627\u0645\u0644\u0629 \u0645\u0646 \u0645\u0631\u0627\u064a\u0627 \u0627\u0644\u062a\u0635\u0648\u064a\u0631 \u062f\u0627\u062e\u0644 \u0634\u0646\u0637\u0629 \u062c\u0644\u062f \u0623\u0646\u064a\u0642\u0629\u060c \u0645\u0631\u062a\u0628\u0629 \u0648\u062c\u0627\u0647\u0632\u0629 \u0644\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u064a\u0648\u0645\u064a.', img: ph('#7C5CFC','#FF8FB1','\ud83e\uddf0'), order:2},
+  {name:'\u0645\u0641\u062a\u0627\u062d \u0633\u0643\u064a\u0644\u0631 (Scaler Key)', price:'60 \u062c', desc:'\u0645\u0641\u062a\u0627\u062d \u0636\u0628\u0637 \u0631\u0623\u0633 \u062c\u0647\u0627\u0632 \u0627\u0644\u0633\u0643\u064a\u0644\u0631\u060c \u0645\u0639\u062a\u0645\u062f \u0644\u0644\u062a\u0639\u0642\u064a\u0645 \u062d\u062a\u0649 134\u00b0C.', img: ph('#FFC93C','#FF6B6B','\ud83d\udd27'), order:3},
+  {name:'\u062a\u0645\u0628\u0644\u062a \u0642\u064a\u0627\u0633 \u0627\u0644\u0623\u0633\u0646\u0627\u0646', price:'5 \u062c', desc:'\u0642\u0627\u0644\u0628 \u0644\u062a\u062d\u062f\u064a\u062f \u0645\u0648\u0627\u0636\u0639 \u0627\u0644\u0623\u0633\u0646\u0627\u0646 \u0627\u0644\u0639\u0644\u0648\u064a\u0629 \u0648\u0627\u0644\u0633\u0641\u0644\u064a\u0629 \u0628\u062f\u0642\u0629 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062a\u062e\u0637\u064a\u0637 \u0644\u0644\u0639\u0644\u0627\u062c.', img: ph('#00C2A8','#FFC93C','\ud83d\udcd0'), order:4},
+  {name:'\u0645\u064a\u062f\u0627\u0644\u064a\u0629 \u0643\u064a \u062a\u0634\u064a\u0646 \u0645\u062e\u0635\u0635\u0629', price:'25 / 15 \u062c', desc:'\u0645\u064a\u062f\u0627\u0644\u064a\u0629 \u0628\u0634\u0643\u0644 \u0627\u0644\u0633\u0646\u060c \u062a\u064f\u062d\u0641\u0631 \u0628\u0627\u0633\u0645 \u0627\u0644\u0639\u064a\u0627\u062f\u0629 \u0623\u0648 \u0627\u0644\u0634\u0631\u0643\u0629 \u062d\u0633\u0628 \u0627\u0644\u0637\u0644\u0628. \u0627\u0633\u062a\u0627\u0646\u0644\u0633 25 \u062c\u060c \u0628\u0644\u0627\u0633\u062a\u064a\u0643 15 \u062c.', img: ph('#FF8FB1','#7C5CFC','\ud83e\uddb7'), order:5},
+  {name:'\u0645\u0633\u0637\u0631\u0629 \u0642\u064a\u0627\u0633 \u0627\u0644\u0623\u0633\u0646\u0627\u0646 (mm)', price:'27 \u062c', desc:'\u0645\u0633\u0637\u0631\u0629 \u0627\u0633\u062a\u0627\u0646\u0644\u0633 \u0645\u062f\u0631\u0651\u062c\u0629 \u0628\u0627\u0644\u0645\u064a\u0644\u064a\u0645\u062a\u0631 \u0644\u0642\u064a\u0627\u0633 \u0623\u0628\u0639\u0627\u062f \u0627\u0644\u0623\u0633\u0646\u0627\u0646 \u0648\u0627\u0644\u062a\u064a\u062c\u0627\u0646 \u0628\u062f\u0642\u0629.', img: ph('#FF6B6B','#00C2A8','\ud83d\udccf'), order:6}
 ];
  
-const ADMIN_PASSWORD = 'dentcraft2026'; // ط؛ظٹظ‘ط±ظ‡ط§ ظ„ظƒظ„ظ…ط© ط³ط± ط®ط§طµط© ط¨ظٹظƒ
-const MAX_DOC_BYTES_APPROX = 700000; // ظ‡ط§ظ…ط´ ط£ظ…ط§ظ† طھط­طھ ط­ط¯ ط§ظ„ظ…ظٹط¬ط§ ط¨ط§ظٹطھ ظ„ظƒظ„ ظ…ط³طھظ†ط¯ ظپظٹ Firestore
+const ADMIN_PASSWORD = 'dentcraft2026'; // \u063a\u064a\u0651\u0631\u0647\u0627 \u0644\u0643\u0644\u0645\u0629 \u0633\u0631 \u062e\u0627\u0635\u0629 \u0628\u064a\u0643
+const MAX_DOC_BYTES_APPROX = 700000; // \u0647\u0627\u0645\u0634 \u0623\u0645\u0627\u0646 \u062a\u062d\u062a \u062d\u062f \u0627\u0644\u0645\u064a\u062c\u0627 \u0628\u0627\u064a\u062a \u0644\u0643\u0644 \u0645\u0633\u062a\u0646\u062f \u0641\u064a Firestore
  
 let PRODUCTS = [];
 let draft = null;
@@ -511,7 +511,7 @@ function cardColor(i){
   return colors[i % colors.length];
 }
  
-/* ---------- طھطµط؛ظٹط± ظˆط¶ط؛ط· ط§ظ„طµظˆط±ط© طھظ„ظ‚ط§ط¦ظٹظ‹ط§ ظ‚ط¨ظ„ ط§ظ„طھط­ظˆظٹظ„ ظ„ظ€ base64 ---------- */
+/* ---------- \u062a\u0635\u063a\u064a\u0631 \u0648\u0636\u063a\u0637 \u0627\u0644\u0635\u0648\u0631\u0629 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627 \u0642\u0628\u0644 \u0627\u0644\u062a\u062d\u0648\u064a\u0644 \u0644\u0640 base64 ---------- */
 function resizeImageFile(file, maxDim = 700, quality = 0.72){
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -547,11 +547,11 @@ async function seedIfEmpty(){
   }
 }
  
-/* ---------- ط¹ط±ط¶ ط§ظ„ظƒط±ظˆطھ ظپظٹ ط§ظ„طµظپط­ط© ط§ظ„ط±ط¦ظٹط³ظٹط© ---------- */
+/* ---------- \u0639\u0631\u0636 \u0627\u0644\u0643\u0631\u0648\u062a \u0641\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629 ---------- */
 function renderGrid(){
   const grid = document.getElementById('productGrid');
   if(!PRODUCTS.length){
-    grid.innerHTML = '<p class="empty-msg">ظ„ط§ طھظˆط¬ط¯ ظ…ظ†طھط¬ط§طھ ظ…ط¹ط±ظˆط¶ط© ط­ط§ظ„ظٹظ‹ط§.</p>';
+    grid.innerHTML = '<p class="empty-msg">\u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0646\u062a\u062c\u0627\u062a \u0645\u0639\u0631\u0648\u0636\u0629 \u062d\u0627\u0644\u064a\u064b\u0627.</p>';
     return;
   }
   grid.innerHTML = PRODUCTS.map((p,i) => `
@@ -564,9 +564,9 @@ function renderGrid(){
         <h3>${escapeHTML(p.name)}</h3>
         <p>${escapeHTML(p.desc)}</p>
         <div class="card-order">
-          <a class="order-link" href="https://wa.me/201282175854?text=${encodeURIComponent('ط¹ط§ظٹط² ط£ط·ظ„ط¨: '+p.name)}" target="_blank" rel="noopener">
+          <a class="order-link" href="https://wa.me/201282175854?text=${encodeURIComponent('\u0639\u0627\u064a\u0632 \u0623\u0637\u0644\u0628: '+p.name)}" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4C8.4 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-            ط§ط·ظ„ط¨ ط§ظ„ط¢ظ†
+            \u0627\u0637\u0644\u0628 \u0627\u0644\u0622\u0646
           </a>
         </div>
       </div>
@@ -574,26 +574,26 @@ function renderGrid(){
   `).join('');
 }
  
-/* ---------- ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ---------- */
+/* ---------- \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645 ---------- */
 function renderAdminList(){
   const list = document.getElementById('adminList');
   if(!draft.length){
-    list.innerHTML = '<p class="hint">ظ„ط§ طھظˆط¬ط¯ ظ…ظ†طھط¬ط§طھ. ط§ط¶ط؛ط· "ط¥ط¶ط§ظپط© ظ…ظ†طھط¬ ط¬ط¯ظٹط¯" ظ„ظ„ط¨ط¯ط،.</p>';
+    list.innerHTML = '<p class="hint">\u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0646\u062a\u062c\u0627\u062a. \u0627\u0636\u063a\u0637 "\u0625\u0636\u0627\u0641\u0629 \u0645\u0646\u062a\u062c \u062c\u062f\u064a\u062f" \u0644\u0644\u0628\u062f\u0621.</p>';
     return;
   }
   list.innerHTML = draft.map((p, idx) => `
     <div class="admin-row" data-idx="${idx}">
       <img class="admin-thumb" src="${p.img}">
       <div class="admin-fields">
-        <input type="text" class="af-name" data-idx="${idx}" data-field="name" value="${escapeAttr(p.name)}" placeholder="ط§ط³ظ… ط§ظ„ظ…ظ†طھط¬">
-        <input type="text" class="af-price" data-idx="${idx}" data-field="price" value="${escapeAttr(p.price)}" placeholder="ط§ظ„ط³ط¹ط± (ظ…ط«ط§ظ„: 45 ط¬)">
-        <textarea class="af-desc" data-idx="${idx}" data-field="desc" placeholder="ط§ظ„ظˆطµظپ">${escapeHTML(p.desc)}</textarea>
+        <input type="text" class="af-name" data-idx="${idx}" data-field="name" value="${escapeAttr(p.name)}" placeholder="\u0627\u0633\u0645 \u0627\u0644\u0645\u0646\u062a\u062c">
+        <input type="text" class="af-price" data-idx="${idx}" data-field="price" value="${escapeAttr(p.price)}" placeholder="\u0627\u0644\u0633\u0639\u0631 (\u0645\u062b\u0627\u0644: 45 \u062c)">
+        <textarea class="af-desc" data-idx="${idx}" data-field="desc" placeholder="\u0627\u0644\u0648\u0635\u0641">${escapeHTML(p.desc)}</textarea>
         <label class="upload-btn">
-          ًں–¼ طھط؛ظٹظٹط± ط§ظ„طµظˆط±ط©
+          \ud83d\uddbc \u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u0635\u0648\u0631\u0629
           <input type="file" accept="image/*" class="af-img" data-idx="${idx}">
         </label>
       </div>
-      <button class="admin-delete" data-idx="${idx}" title="ط­ط°ظپ ط§ظ„ظ…ظ†طھط¬">ًں—‘</button>
+      <button class="admin-delete" data-idx="${idx}" title="\u062d\u0630\u0641 \u0627\u0644\u0645\u0646\u062a\u062c">\ud83d\uddd1</button>
     </div>
   `).join('');
  
@@ -608,16 +608,16 @@ function renderAdminList(){
       const idx = +this.dataset.idx;
       const file = e.target.files[0];
       if(!file) return;
-      showToast('ط¬ط§ط±ظٹ طھطµط؛ظٹط± ط§ظ„طµظˆط±ط©...');
+      showToast('\u062c\u0627\u0631\u064a \u062a\u0635\u063a\u064a\u0631 \u0627\u0644\u0635\u0648\u0631\u0629...');
       try{
         const resizedDataUrl = await resizeImageFile(file);
         draft[idx].img = resizedDataUrl;
         const row = list.querySelectorAll('.admin-row')[idx];
         if(row) row.querySelector('.admin-thumb').src = resizedDataUrl;
-        showToast('طھظ… طھط¬ظ‡ظٹط² ط§ظ„طµظˆط±ط©طŒ ظ…طھظ†ط³ط§ط´ طھط¶ط؛ط· "ط­ظپط¸" âœ…');
+        showToast('\u062a\u0645 \u062a\u062c\u0647\u064a\u0632 \u0627\u0644\u0635\u0648\u0631\u0629\u060c \u0645\u062a\u0646\u0633\u0627\u0634 \u062a\u0636\u063a\u0637 "\u062d\u0641\u0638" \u2705');
       }catch(err){
         console.error(err);
-        alert('طھط¹ط°ظ‘ط± ظ…ط¹ط§ظ„ط¬ط© ظ‡ط°ظ‡ ط§ظ„طµظˆط±ط©طŒ ط¬ط±ط¨ طµظˆط±ط© ط£ط®ط±ظ‰');
+        alert('\u062a\u0639\u0630\u0651\u0631 \u0645\u0639\u0627\u0644\u062c\u0629 \u0647\u0630\u0647 \u0627\u0644\u0635\u0648\u0631\u0629\u060c \u062c\u0631\u0628 \u0635\u0648\u0631\u0629 \u0623\u062e\u0631\u0649');
       }
     });
   });
@@ -626,23 +626,23 @@ function renderAdminList(){
     btn.addEventListener('click', async function(){
       const idx = +this.dataset.idx;
       const p = draft[idx];
-      if(!confirm('ظ…طھط£ظƒط¯ ط¥ظ†ظƒ ط¹ط§ظٹط² طھط­ط°ظپ "'+p.name+'"طں')) return;
+      if(!confirm('\u0645\u062a\u0623\u0643\u062f \u0625\u0646\u0643 \u0639\u0627\u064a\u0632 \u062a\u062d\u0630\u0641 "'+p.name+'"\u061f')) return;
       if(p.id){
         try{ await deleteDoc(doc(db,'products',p.id)); }catch(e){ console.error(e); }
       }
       draft.splice(idx,1);
       renderAdminList();
-      showToast('طھظ… ط­ط°ظپ ط§ظ„ظ…ظ†طھط¬');
+      showToast('\u062a\u0645 \u062d\u0630\u0641 \u0627\u0644\u0645\u0646\u062a\u062c');
     });
   });
 }
  
 function addNewProduct(){
   draft.push({
-    name: 'ظ…ظ†طھط¬ ط¬ط¯ظٹط¯',
-    price: '0 ط¬',
-    desc: 'ط§ظƒطھط¨ ظˆطµظپ ط§ظ„ظ…ظ†طھط¬ ظ‡ظ†ط§...',
-    img: ph('#00C2A8','#FF6B6B','ًں†•'),
+    name: '\u0645\u0646\u062a\u062c \u062c\u062f\u064a\u062f',
+    price: '0 \u062c',
+    desc: '\u0627\u0643\u062a\u0628 \u0648\u0635\u0641 \u0627\u0644\u0645\u0646\u062a\u062c \u0647\u0646\u0627...',
+    img: ph('#00C2A8','#FF6B6B','\ud83c\udd95'),
     order: draft.length
   });
   renderAdminList();
@@ -651,13 +651,13 @@ function addNewProduct(){
 }
  
 async function saveAll(){
-  showToast('ط¬ط§ط±ظٹ ط§ظ„ط­ظپط¸...');
+  showToast('\u062c\u0627\u0631\u064a \u0627\u0644\u062d\u0641\u0638...');
   try{
     for(let i=0;i<draft.length;i++){
       const p = draft[i];
       if(p.img && p.img.length > MAX_DOC_BYTES_APPROX){
-        showToast('âڑ ï¸ڈ طµظˆط±ط© "'+p.name+'" ظƒط¨ظٹط±ط© ط¬ط¯ظ‹ط§طŒ ط¬ط±ط¨ طµظˆط±ط© ط£طµط؛ط±');
-        alert('طµظˆط±ط© ط§ظ„ظ…ظ†طھط¬ "'+p.name+'" ظƒط¨ظٹط±ط© ط¬ط¯ظ‹ط§ ظˆظ…ظ…ظƒظ† طھظپط´ظ„ ط§ظ„ط­ظپط¸. ط¬ط±ط¨ طھط±ظپط¹ظ‡ط§ طھط§ظ†ظٹ (ط¨ظٹطھظ… طھطµط؛ظٹط±ظ‡ط§ طھظ„ظ‚ط§ط¦ظٹظ‹ط§) ط£ظˆ ط§ط³طھط®ط¯ظ… طµظˆط±ط© ط£ظ‚ظ„ ط¯ظ‚ط©.');
+        showToast('\u26a0\ufe0f \u0635\u0648\u0631\u0629 "'+p.name+'" \u0643\u0628\u064a\u0631\u0629 \u062c\u062f\u064b\u0627\u060c \u062c\u0631\u0628 \u0635\u0648\u0631\u0629 \u0623\u0635\u063a\u0631');
+        alert('\u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0646\u062a\u062c "'+p.name+'" \u0643\u0628\u064a\u0631\u0629 \u062c\u062f\u064b\u0627 \u0648\u0645\u0645\u0643\u0646 \u062a\u0641\u0634\u0644 \u0627\u0644\u062d\u0641\u0638. \u062c\u0631\u0628 \u062a\u0631\u0641\u0639\u0647\u0627 \u062a\u0627\u0646\u064a (\u0628\u064a\u062a\u0645 \u062a\u0635\u063a\u064a\u0631\u0647\u0627 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627) \u0623\u0648 \u0627\u0633\u062a\u062e\u062f\u0645 \u0635\u0648\u0631\u0629 \u0623\u0642\u0644 \u062f\u0642\u0629.');
         return;
       }
       const data = { name:p.name, price:p.price, desc:p.desc, img:p.img, order: i };
@@ -668,25 +668,25 @@ async function saveAll(){
         p.id = newRef.id;
       }
     }
-    showToast('طھظ… ط­ظپط¸ ظƒظ„ ط§ظ„طھط¹ط¯ظٹظ„ط§طھ ط¨ظ†ط¬ط§ط­ âœ…');
+    showToast('\u062a\u0645 \u062d\u0641\u0638 \u0643\u0644 \u0627\u0644\u062a\u0639\u062f\u064a\u0644\u0627\u062a \u0628\u0646\u062c\u0627\u062d \u2705');
   }catch(e){
     console.error(e);
-    showToast('âڑ ï¸ڈ ط­طµظ„ ط®ط·ط£ ط£ط«ظ†ط§ط، ط§ظ„ط­ظپط¸');
-    alert('ط­طµظ„ ط®ط·ط£ ط£ط«ظ†ط§ط، ط§ظ„ط­ظپط¸. طھط£ظƒط¯ ظ…ظ† ط§طھطµط§ظ„ظƒ ط¨ط§ظ„ط¥ظ†طھط±ظ†طھ ظˆظ…ظ† ظ‚ظˆط§ط¹ط¯ Firestore. ط±ط§ط¬ط¹ Console (F12) ظ„طھظپط§طµظٹظ„ ط§ظ„ط®ط·ط£.');
+    showToast('\u26a0\ufe0f \u062d\u0635\u0644 \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062d\u0641\u0638');
+    alert('\u062d\u0635\u0644 \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062d\u0641\u0638. \u062a\u0623\u0643\u062f \u0645\u0646 \u0627\u062a\u0635\u0627\u0644\u0643 \u0628\u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a \u0648\u0645\u0646 \u0642\u0648\u0627\u0639\u062f Firestore. \u0631\u0627\u062c\u0639 Console (F12) \u0644\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u062e\u0637\u0623.');
   }
 }
  
 async function resetDefaults(){
-  if(!confirm('ظ‡ظٹطھظ… ط­ط°ظپ ظƒظ„ ط§ظ„ظ…ظ†طھط¬ط§طھ ط§ظ„ط­ط§ظ„ظٹط© ظˆط§ط³طھط±ط¬ط§ط¹ ط§ظ„ظ‚ط§ط¦ظ…ط© ط§ظ„ط§ظپطھط±ط§ط¶ظٹط©طŒ ظ…طھط£ظƒط¯طں')) return;
-  showToast('ط¬ط§ط±ظٹ ط§ظ„ط§ط³طھط±ط¬ط§ط¹...');
+  if(!confirm('\u0647\u064a\u062a\u0645 \u062d\u0630\u0641 \u0643\u0644 \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a \u0627\u0644\u062d\u0627\u0644\u064a\u0629 \u0648\u0627\u0633\u062a\u0631\u062c\u0627\u0639 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629\u060c \u0645\u062a\u0623\u0643\u062f\u061f')) return;
+  showToast('\u062c\u0627\u0631\u064a \u0627\u0644\u0627\u0633\u062a\u0631\u062c\u0627\u0639...');
   try{
     const snap = await getDocs(productsCol);
     for(const d of snap.docs){ await deleteDoc(d.ref); }
     for(const p of DEFAULT_PRODUCTS){ await addDoc(productsCol, p); }
-    showToast('طھظ… ط§ط³طھط±ط¬ط§ط¹ ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ ط§ظ„ط§ظپطھط±ط§ط¶ظٹط©');
+    showToast('\u062a\u0645 \u0627\u0633\u062a\u0631\u062c\u0627\u0639 \u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629');
   }catch(e){
     console.error(e);
-    showToast('âڑ ï¸ڈ ط­طµظ„ ط®ط·ط£');
+    showToast('\u26a0\ufe0f \u062d\u0635\u0644 \u062e\u0637\u0623');
   }
 }
  
@@ -697,7 +697,7 @@ function showToast(msg){
   setTimeout(()=> t.classList.remove('show'), 2400);
 }
  
-/* ---------- ظپطھط­/ط؛ظ„ظ‚ ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… ظ…ط¹ ط¨ط§ط³ظˆط±ط¯ ط¨ط³ظٹط· ---------- */
+/* ---------- \u0641\u062a\u062d/\u063a\u0644\u0642 \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645 \u0645\u0639 \u0628\u0627\u0633\u0648\u0631\u062f \u0628\u0633\u064a\u0637 ---------- */
 let adminUnlocked = sessionStorage.getItem('dc_admin_ok') === '1';
  
 async function openAdmin(){
@@ -712,10 +712,10 @@ function closeAdmin(){
  
 document.getElementById('adminToggle').addEventListener('click', () => {
   if(!adminUnlocked){
-    const pass = prompt('ظ…ظ† ظپط¶ظ„ظƒ ط£ط¯ط®ظ„ ظƒظ„ظ…ط© ط³ط± ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ…:');
+    const pass = prompt('\u0645\u0646 \u0641\u0636\u0644\u0643 \u0623\u062f\u062e\u0644 \u0643\u0644\u0645\u0629 \u0633\u0631 \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645:');
     if(pass === null) return;
     if(pass !== ADMIN_PASSWORD){
-      alert('ظƒظ„ظ…ط© ط§ظ„ط³ط± ط؛ظٹط± طµط­ظٹط­ط©');
+      alert('\u0643\u0644\u0645\u0629 \u0627\u0644\u0633\u0631 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d\u0629');
       return;
     }
     adminUnlocked = true;
@@ -737,7 +737,7 @@ document.getElementById('exportJsonBtn').addEventListener('click', () => {
   const a = document.createElement('a');
   a.href = url; a.download = 'dentcraft-products-backup.json'; a.click();
   URL.revokeObjectURL(url);
-  showToast('ط¬ط§ط±ظٹ طھظ†ط²ظٹظ„ ط§ظ„ظ†ط³ط®ط© ط§ظ„ط§ط­طھظٹط§ط·ظٹط©...');
+  showToast('\u062c\u0627\u0631\u064a \u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u0627\u062d\u062a\u064a\u0627\u0637\u064a\u0629...');
 });
  
 document.getElementById('importFile').addEventListener('change', function(e){
@@ -750,19 +750,19 @@ document.getElementById('importFile').addEventListener('change', function(e){
       if(Array.isArray(parsed)){
         draft = parsed.map(p => ({...p}));
         renderAdminList();
-        showToast('طھظ… ط§ظ„ط§ط³طھظٹط±ط§ط¯طŒ ط§ط¶ط؛ط· "ط­ظپط¸" ظ„طھظپط¹ظٹظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ');
+        showToast('\u062a\u0645 \u0627\u0644\u0627\u0633\u062a\u064a\u0631\u0627\u062f\u060c \u0627\u0636\u063a\u0637 "\u062d\u0641\u0638" \u0644\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a');
       }else{
-        alert('ظ…ظ„ظپ ط؛ظٹط± طµط§ظ„ط­');
+        alert('\u0645\u0644\u0641 \u063a\u064a\u0631 \u0635\u0627\u0644\u062d');
       }
     }catch(err){
-      alert('طھط¹ط°ظ‘ط± ظ‚ط±ط§ط،ط© ط§ظ„ظ…ظ„ظپطŒ طھط£ظƒط¯ ط¥ظ†ظ‡ ظ…ظ„ظپ JSON طµط­ظٹط­');
+      alert('\u062a\u0639\u0630\u0651\u0631 \u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0645\u0644\u0641\u060c \u062a\u0623\u0643\u062f \u0625\u0646\u0647 \u0645\u0644\u0641 JSON \u0635\u062d\u064a\u062d');
     }
   };
   reader.readAsText(file);
   this.value = '';
 });
  
-/* ---------- طھط´ط؛ظٹظ„ ط£ظˆظ„ظٹ ---------- */
+/* ---------- \u062a\u0634\u063a\u064a\u0644 \u0623\u0648\u0644\u064a ---------- */
 (async function init(){
   await seedIfEmpty();
   onSnapshot(query(productsCol, orderBy('order')), snap => {
@@ -771,5 +771,4 @@ document.getElementById('importFile').addEventListener('change', function(e){
   });
 })();
 </script>
-
 
