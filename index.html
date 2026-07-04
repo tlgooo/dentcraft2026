@@ -490,7 +490,9 @@ function loadProducts(){
       if(Array.isArray(parsed)) return parsed;
     }
   }catch(e){}
-  return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+ return JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+}
+
 function saveProducts(products){
   try{
     localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
