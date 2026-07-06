@@ -771,4 +771,58 @@ document.getElementById('importFile').addEventListener('change', function(e){
   });
 })();
 </script>
+<audio id="bgMusic" loop preload="auto">
+  <source src="welcome-music.mp3" type="audio/mpeg">
+</audio>
 
+<button id="soundToggle" aria-label="تشغيل الموسيقى" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: #0f766e;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+">🔇</button>
+
+<script>
+(function () {
+  const music = document.getElementById('bgMusic');
+  const btn = document.getElementById('soundToggle');
+  music.volume = 0.35;
+
+  let isPlaying = false;
+
+  btn.addEventListener('click', function () {
+    if (isPlaying) {
+      music.pause();
+      btn.textContent = '🔇';
+      btn.setAttribute('aria-label', 'تشغيل الموسيقى');
+    } else {
+      music.play().catch(() => {});
+      btn.textContent = '🔊';
+      btn.setAttribute('aria-label', 'إيقاف الموسيقى');
+    }
+    isPlaying = !isPlaying;
+  });
+
+  const clickSound = new Audio('click.mp3');
+  clickSound.volume = 0.4;
+
+  document.querySelectorAll('a, button').forEach(function (el) {
+    el.addEventListener('click', function () {
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+    });
+  });
+})();
+</script>
