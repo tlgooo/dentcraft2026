@@ -802,14 +802,14 @@ document.getElementById('importFile').addEventListener('change', function(e){
 
   let isPlaying = false;
 
-  btn.addEventListener('click', function () {
+btn.addEventListener('click', function () {
     if (isPlaying) {
       music.pause();
-      btn.textContent = '🔇';
+      btn.style.background = '#9CA3AF';
       btn.setAttribute('aria-label', 'تشغيل الموسيقى');
     } else {
       music.play().catch(() => {});
-      btn.textContent = '🔊';
+      btn.style.background = '#0f766e';
       btn.setAttribute('aria-label', 'إيقاف الموسيقى');
     }
     isPlaying = !isPlaying;
