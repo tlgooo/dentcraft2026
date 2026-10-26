@@ -1,873 +1,164 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DentCraft | أدوات أسنان مصنوعة بدقة</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- شات عادل (نسخة الشخصية) -->
 <style>
-  :root{
-    --bg:#FBFAFF;
-    --bg-soft:#F0F3FF;
-    --ink:#1E2749;
-    --ink-soft:#5C6789;
-    --coral:#FF6B6B;
-    --coral-dark:#F04848;
-    --teal:#00C2A8;
-    --sun:#FFC93C;
-    --purple:#7C5CFC;
-    --pink:#FF8FB1;
-    --whatsapp:#25D366;
-    --card:#FFFFFF;
-    --radius:20px;
-    --shadow:0 10px 30px rgba(40,50,90,.10);
-    --shadow-lg:0 25px 55px rgba(40,50,90,.20);
-    --grad-main: linear-gradient(120deg,#FF6B6B 0%,#FFC93C 45%,#00C2A8 100%);
-    --grad-purple: linear-gradient(120deg,#7C5CFC,#FF6B6B);
-    --font-display:'Tajawal',sans-serif;
-    --font-body:'Cairo',sans-serif;
-    --font-mono:'IBM Plex Mono',monospace;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:var(--font-body);
-    background:var(--bg);
-    color:var(--ink);
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  img{max-width:100%; display:block;}
-  a{color:inherit;}
-  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  #adel-launch{position:fixed;bottom:84px;right:20px;z-index:9999;display:flex;align-items:center;
+    gap:10px;background:#fff;border:none;border-radius:40px;padding:6px 16px 6px 6px;cursor:pointer;
+    box-shadow:0 8px 24px rgba(40,50,90,.25);font-family:'Cairo',Tahoma,sans-serif;direction:rtl}
+  #adel-launch .av{width:52px;height:52px;border-radius:50%;overflow:hidden;position:relative;flex-shrink:0;
+    border:3px solid #00C2A8}
+  #adel-launch .dot{position:absolute;bottom:2px;left:2px;width:12px;height:12px;border-radius:50%;
+    background:#25D366;border:2px solid #fff}
+  #adel-launch span.t{font-weight:700;font-size:14px;color:#1E2749;white-space:nowrap}
+  #adel-launch.pulse{animation:adelPulse 2.4s infinite}
+  @keyframes adelPulse{0%,100%{box-shadow:0 8px 24px rgba(40,50,90,.25)}50%{box-shadow:0 8px 30px rgba(0,194,168,.6)}}
 
-  /* ---------- ruler strip (signature, recolored) ---------- */
-  .ruler-strip{
-    height:10px;
-    background: var(--grad-main);
-    background-size:200% 100%;
-    animation: slideStripe 6s linear infinite;
-  }
-  @keyframes slideStripe{
-    0%{background-position:0% 0;}
-    100%{background-position:200% 0;}
-  }
+  #adel-box{position:fixed;bottom:156px;right:20px;width:360px;max-width:calc(100vw - 24px);
+    height:560px;max-height:calc(100vh - 176px);background:#fff;border-radius:22px;
+    box-shadow:0 20px 50px rgba(40,50,90,.35);display:none;flex-direction:column;overflow:hidden;
+    z-index:9999;font-family:'Cairo',Tahoma,sans-serif;direction:rtl}
+  #adel-head{background:linear-gradient(135deg,#7C5CFC,#FF6B6B);color:#fff;padding:18px 16px 14px;
+    display:flex;align-items:center;gap:14px;position:relative}
+  #adel-head .big{width:76px;height:76px;border-radius:50%;overflow:hidden;border:4px solid rgba(255,255,255,.9);
+    background:#fff;flex-shrink:0;position:relative}
+  #adel-head .big img,#adel-launch .av img,.adel-svg{width:100%;height:100%;object-fit:cover;display:block}
+  #adel-head .big::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid #FFC93C;
+    opacity:0;pointer-events:none}
+  .speaking .big::after{animation:ring 1s infinite}
+  @keyframes ring{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+  .speaking .big img,.speaking .big .adel-svg{animation:bob .5s infinite alternate}
+  @keyframes bob{from{transform:translateY(0)}to{transform:translateY(-2px) scale(1.03)}}
+  .speaking .mouth{animation:talk .22s infinite alternate;transform-origin:50% 50%;transform-box:fill-box}
+  @keyframes talk{from{transform:scaleY(.4)}to{transform:scaleY(1.5)}}
+  #adel-head h4{font-size:17px;font-weight:800;margin-bottom:2px}
+  #adel-head .st{font-size:12.5px;opacity:.95;display:flex;align-items:center;gap:6px}
+  #adel-head .st i{width:8px;height:8px;border-radius:50%;background:#25D366;display:inline-block}
+  .wave{display:none;gap:3px;align-items:flex-end;height:14px;margin-top:6px}
+  .speaking .wave{display:flex}
+  .wave b{width:3px;background:#fff;border-radius:2px;animation:wv .6s infinite alternate}
+  .wave b:nth-child(2){animation-delay:.15s}.wave b:nth-child(3){animation-delay:.3s}
+  .wave b:nth-child(4){animation-delay:.45s}
+  @keyframes wv{from{height:3px}to{height:14px}}
+  .hbtn{position:absolute;top:10px;left:10px;display:flex;gap:6px}
+  .hbtn button{background:rgba(255,255,255,.2);color:#fff;border:none;width:32px;height:32px;border-radius:50%;
+    cursor:pointer;font-size:15px}
 
-  /* ---------- Header ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(124,92,252,0.12);
-  }
-  .header-inner{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 20px;
-  }
-  .logo{
-    font-family:var(--font-display);
-    font-weight:900;
-    font-size:26px;
-    letter-spacing:0.5px;
-    display:flex; align-items:baseline; gap:8px;
-    background:var(--grad-main);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-  .logo .tag{
-    font-family:var(--font-mono);
-    font-size:11px;
-    color:#fff;
-    font-weight:700;
-    background:var(--purple);
-    padding:3px 9px;
-    border-radius:20px;
-    letter-spacing:0.5px;
-    -webkit-background-clip:initial;
-    background-clip:initial;
-  }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--font-body); font-weight:700; font-size:14px;
-    padding:12px 22px; border-radius:30px;
-    border:none; cursor:pointer;
-    transition:transform .15s ease, box-shadow .15s ease;
-    text-decoration:none;
-  }
-  .btn:hover{transform:translateY(-2px);}
-  .btn-whatsapp{background:var(--whatsapp); color:#fff; box-shadow:0 8px 20px rgba(37,211,102,0.4);}
-  .btn-main{background:var(--grad-main); color:#fff; box-shadow:0 8px 20px rgba(255,107,107,0.35);}
-  .btn-purple{background:var(--grad-purple); color:#fff; box-shadow:0 8px 20px rgba(124,92,252,0.35);}
-  .btn-outline{background:#fff; color:var(--ink); border:1.5px solid #E4E7F5;}
-  .btn-danger{background:#FFE3E3; color:#D64545;}
-  .btn svg{width:18px; height:18px;}
-
-  /* ---------- Hero ---------- */
-  .hero{
-    padding:70px 0 50px;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::before, .hero::after{
-    content:"";
-    position:absolute; width:340px; height:340px; border-radius:50%;
-    filter:blur(60px); opacity:.35; z-index:0;
-  }
-  .hero::before{background:var(--coral); top:-100px; left:-80px;}
-  .hero::after{background:var(--teal); bottom:-120px; right:-80px;}
-  .hero-grid{
-    position:relative; z-index:1;
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center;
-  }
-  .eyebrow{
-    font-family:var(--font-mono);
-    font-size:12.5px; letter-spacing:2px; color:var(--purple);
-    text-transform:uppercase;
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:18px; font-weight:700;
-  }
-  .eyebrow::before{content:""; width:26px; height:3px; border-radius:3px; background:var(--grad-main);}
-  .hero h1{
-    font-family:var(--font-display); font-weight:900;
-    font-size:clamp(34px, 5vw, 54px);
-    line-height:1.2;
-    margin-bottom:20px;
-  }
-  .hero h1 em{
-    font-style:normal;
-    background:var(--grad-main);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero p.lead{
-    font-size:17px; color:var(--ink-soft); max-width:480px; margin-bottom:30px;
-  }
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
-  .hero-visual{
-    position:relative;
-    background:var(--grad-purple);
-    border-radius:26px;
-    padding:40px;
-    box-shadow:var(--shadow-lg);
-    text-align:center;
-    color:#fff;
-  }
-  .hero-visual .emoji-badge{
-    font-size:96px; margin-bottom:10px;
-    filter:drop-shadow(0 10px 20px rgba(0,0,0,.25));
-  }
-  .hero-visual h3{font-family:var(--font-display); font-weight:800; font-size:20px; margin-bottom:8px;}
-  .hero-visual p{font-size:13.5px; opacity:.9;}
-  .measure-tag{
-    position:absolute; top:-16px; left:-16px;
-    background:var(--sun); color:#402F00;
-    font-family:var(--font-mono); font-weight:800; font-size:12.5px;
-    padding:9px 16px; border-radius:10px;
-    box-shadow:0 10px 20px rgba(255,201,60,0.5);
-    transform:rotate(-4deg);
-  }
-
-  section{padding:64px 0;}
-  .section-head{
-    display:flex; align-items:flex-end; justify-content:space-between;
-    margin-bottom:34px; flex-wrap:wrap; gap:16px;
-    border-bottom:2px dashed #E4E7F5; padding-bottom:20px;
-  }
-  .section-head h2{
-    font-family:var(--font-display); font-weight:800; font-size:clamp(24px,3vw,32px);
-  }
-  .section-head .sub{color:var(--ink-soft); font-size:14.5px; max-width:460px;}
-
-  /* ---------- Products grid ---------- */
-  .grid{
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:24px;
-  }
-  .empty-msg{color:var(--ink-soft); padding:40px; text-align:center; width:100%;}
-  .card{
-    background:var(--card); border-radius:var(--radius); overflow:hidden;
-    box-shadow:var(--shadow); border-top:6px solid var(--card-color, var(--coral));
-    display:flex; flex-direction:column;
-    transition:transform .2s ease, box-shadow .2s ease;
-    position:relative;
-  }
-  .card:hover{transform:translateY(-6px); box-shadow:var(--shadow-lg);}
-  .card-media{
-    position:relative; aspect-ratio:1/1; overflow:hidden;
-    background:var(--bg-soft);
-  }
-  .card-media img{width:100%; height:100%; object-fit:cover; transition:transform .4s ease;}
-  .card:hover .card-media img{transform:scale(1.08) rotate(1deg);}
-  .price-tag{
-    position:absolute; top:12px; left:12px;
-    background:var(--ink); color:#fff;
-    font-family:var(--font-mono); font-weight:700; font-size:13px;
-    padding:6px 14px; border-radius:20px;
-    box-shadow:0 6px 14px rgba(0,0,0,0.25);
-  }
-  .card-body{padding:18px 18px 22px; display:flex; flex-direction:column; gap:10px; flex:1;}
-  .card-body h3{font-family:var(--font-display); font-weight:800; font-size:17px;}
-  .card-body p{font-size:13.5px; color:var(--ink-soft); flex:1;}
-  .card-order{
-    display:flex; align-items:center; justify-content:space-between;
-    margin-top:6px; padding-top:12px; border-top:1px dashed #E4E7F5;
-  }
-  .card-order .order-link{
-    font-size:13.5px; font-weight:800; color:var(--coral-dark);
-    display:flex; align-items:center; gap:6px; text-decoration:none;
-  }
-  .card-order .order-link svg{width:16px; height:16px; color:var(--whatsapp);}
-
-  /* ---------- Customization note ---------- */
-  .custom-note{
-    background:var(--grad-purple); color:#fff; border-radius:24px;
-    padding:38px; display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:center;
-  }
-  .custom-note .icon-box{
-    width:64px; height:64px; border-radius:18px; background:rgba(255,255,255,0.18);
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:30px;
-  }
-  .custom-note h3{font-family:var(--font-display); font-weight:800; font-size:19px; margin-bottom:6px;}
-  .custom-note p{color:rgba(255,255,255,0.9); font-size:14.5px; max-width:640px;}
-
-  /* ---------- Bulk pricing banner (بديل عروض الكميات المحددة) ---------- */
-  .bulk-banner{
-    background:var(--grad-main); border-radius:24px;
-    padding:40px; display:grid; grid-template-columns:auto 1fr auto; gap:28px; align-items:center;
-    color:#fff; box-shadow:var(--shadow-lg);
-  }
-  .bulk-banner .bulk-icon{font-size:56px;}
-  .bulk-banner h2{font-family:var(--font-display); font-weight:900; font-size:24px; margin-bottom:8px;}
-  .bulk-banner p{font-size:14.5px; opacity:.95; max-width:560px;}
-  .bulk-banner .btn-outline{background:#fff; color:var(--coral-dark);}
-
-  /* ---------- Footer ---------- */
-  footer{background:linear-gradient(160deg,#1E2749,#2B1E4D); color:#fff; padding:50px 0 24px; margin-top:40px;}
-  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; padding-bottom:30px; border-bottom:1px solid rgba(255,255,255,0.12);}
-  .footer-logo{
-    font-family:var(--font-display); font-weight:900; font-size:22px; margin-bottom:10px;
-    background:var(--grad-main); -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .footer-grid p{color:#B9C0DA; font-size:13.5px; max-width:320px;}
-  .contact-list{display:flex; flex-direction:column; gap:10px;}
-  .contact-list a{display:flex; align-items:center; gap:10px; font-size:14.5px; text-decoration:none; color:#fff;}
-  .contact-list svg{width:18px; height:18px; color:var(--sun);}
-  .copyright{padding-top:20px; text-align:center; font-size:12.5px; color:#8A93B8; font-family:var(--font-mono);}
-
-  /* ---------- Admin panel ---------- */
-  #adminToggle{
-    position:fixed; bottom:18px; left:18px; z-index:200;
-    width:54px; height:54px; border-radius:50%;
-    background:var(--grad-purple); color:#fff; border:none; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 25px rgba(124,92,252,0.5);
-    transition:transform .2s ease;
-    animation:pulseGlow 2.4s ease-in-out infinite;
-  }
-  #adminToggle:hover{transform:rotate(35deg) scale(1.08);}
-  #adminToggle svg{width:24px; height:24px;}
-  @keyframes pulseGlow{
-    0%,100%{box-shadow:0 10px 25px rgba(124,92,252,0.5);}
-    50%{box-shadow:0 10px 35px rgba(255,107,107,0.65);}
-  }
-
-  #adminPanel{
-    position:fixed; inset:0; background:rgba(20,15,40,0.55);
-    display:none; align-items:flex-end; justify-content:center; z-index:300;
-    backdrop-filter:blur(3px);
-  }
-  #adminPanel.open{display:flex;}
-  .admin-sheet{
-    background:var(--bg); width:100%; max-width:820px; max-height:90vh; overflow-y:auto;
-    border-radius:26px 26px 0 0; padding:28px 22px 34px; position:relative;
-  }
-  .admin-sheet h3{font-family:var(--font-display); font-weight:900; font-size:20px; margin-bottom:4px;}
-  .admin-sheet .hint{font-size:13px; color:var(--ink-soft); margin-bottom:20px; line-height:1.7;}
-  .admin-row{
-    display:flex; align-items:flex-start; gap:14px; padding:16px;
-    background:#fff; border-radius:16px; margin-bottom:14px; box-shadow:var(--shadow);
-    border:1px solid #EEF0FA;
-  }
-  .admin-row img.admin-thumb{width:64px; height:64px; border-radius:12px; object-fit:cover; flex-shrink:0;}
-  .admin-fields{flex:1; display:flex; flex-direction:column; gap:8px;}
-  .admin-fields input, .admin-fields textarea{
-    width:100%; border:1.5px solid #E4E7F5; border-radius:10px; padding:9px 12px;
-    font-family:var(--font-body); font-size:13.5px; color:var(--ink); background:#FAFAFF;
-  }
-  .admin-fields textarea{resize:vertical; min-height:50px;}
-  .admin-fields input:focus, .admin-fields textarea:focus{outline:none; border-color:var(--purple);}
-  .admin-fields .af-price{max-width:140px;}
-  label.upload-btn{
-    font-family:var(--font-body); font-size:12.5px; font-weight:700;
-    background:var(--bg-soft); color:var(--purple); padding:8px 14px; border-radius:20px; cursor:pointer;
-    display:inline-flex; align-items:center; gap:6px; width:fit-content;
-  }
-  .admin-fields input[type=file]{display:none;}
-  .admin-delete{
-    background:#FFE3E3; color:#D64545; border:none; border-radius:10px;
-    width:38px; height:38px; font-size:16px; cursor:pointer; flex-shrink:0;
-  }
-  .admin-actions{
-    display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;
-  }
-  .admin-actions .btn{flex:1; justify-content:center; min-width:150px;}
-  .admin-close{
-    position:absolute; top:16px; left:16px;
-    background:var(--bg-soft); border:none; font-size:20px; cursor:pointer; color:var(--ink-soft);
-    width:34px; height:34px; border-radius:50%;
-  }
-  .toast{
-    position:fixed; bottom:82px; left:50%; transform:translateX(-50%);
-    background:var(--ink); color:#fff; padding:11px 22px; border-radius:30px;
-    font-size:13.5px; z-index:400; opacity:0; pointer-events:none; transition:opacity .3s ease;
-    box-shadow:var(--shadow-lg);
-  }
-  .toast.show{opacity:1;}
-
-  @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr;}
-    .hero{padding:44px 0 30px;}
-    .custom-note{grid-template-columns:1fr; text-align:center;}
-    .custom-note .icon-box{margin:0 auto;}
-    .bulk-banner{grid-template-columns:1fr; text-align:center;}
-    .footer-grid{flex-direction:column;}
+  #adel-msgs{flex:1;overflow-y:auto;padding:14px;background:#F0F3FF}
+  .adel-m{max-width:84%;padding:9px 13px;border-radius:16px;margin-bottom:9px;line-height:1.7;
+    font-size:14px;white-space:pre-wrap;animation:pop .2s ease}
+  @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .adel-user{background:#7C5CFC;color:#fff;margin-left:auto;border-bottom-left-radius:4px}
+  .adel-bot{background:#fff;color:#1E2749;border:1px solid #E4E7F5;margin-right:auto;border-bottom-right-radius:4px}
+  .adel-typing span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:#9AA3C4;
+    animation:dt 1s infinite}
+  .adel-typing span:nth-child(2){animation-delay:.2s}.adel-typing span:nth-child(3){animation-delay:.4s}
+  @keyframes dt{0%,80%,100%{opacity:.3}40%{opacity:1}}
+  #adel-chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 10px;background:#F0F3FF}
+  #adel-chips button{border:1.5px solid #7C5CFC;color:#7C5CFC;background:#fff;border-radius:20px;
+    padding:6px 13px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  #adel-form{display:flex;align-items:center;gap:6px;border-top:1px solid #E4E7F5;padding:8px;background:#fff}
+  #adel-input{flex:1;border:1.5px solid #E4E7F5;border-radius:24px;padding:10px 14px;font-size:14px;
+    outline:none;direction:rtl;font-family:inherit}
+  #adel-input:focus{border-color:#7C5CFC}
+  #adel-form button{border:none;border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:17px;color:#fff}
+  #adel-send{background:#7C5CFC}
+  #adel-mic{background:#00C2A8}
+  #adel-mic.on{background:#F04848;animation:adelPulse 1s infinite}
+  @media(max-width:520px){
+    #adel-box{right:8px;left:8px;width:auto;bottom:8px;max-height:calc(100vh - 16px);height:calc(100vh - 16px)}
+    #adel-launch span.t{display:none}
+    #adel-launch{padding:6px}
   }
 </style>
-</head>
-<body>
 
-<header>
-  <div class="wrap header-inner">
-    <div class="logo">DentCraft <span class="tag">EG · STAINLESS</span></div>
-    <a class="btn btn-whatsapp" href="https://wa.me/201282175854" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4C8.4 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-      اطلب على واتساب
-    </a>
-  </div>
-  <div class="ruler-strip"></div>
-</header>
-
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">صناعة استانلس · تعقيم آمن حتى 134°C</div>
-      <h1>أدوات أسنان <em>مصنوعة بدقة</em>، لأصحاب العيادات في مصر</h1>
-      <p class="lead">مرايا تصوير، مفاتيح سكيلر، هوك أبيكس، مساطر قياس، وميداليات مخصصة باسم عيادتك — استانلس ستيل مقاوم للصدأ، جاهزة للتعقيم، وأسعارها مناسبة للبيع بالجملة.</p>
-      <div class="hero-actions">
-        <a href="#catalog" class="btn btn-main">تصفح المنتجات</a>
-        <a href="https://wa.me/201282175854" target="_blank" rel="noopener" class="btn btn-outline">تواصل مباشر</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="measure-tag">45 mm ✓</div>
-      <div class="emoji-badge">🦷</div>
-      <h3>جودة وثبات في كل تفصيلة</h3>
-      <p>استانلس ستيل طبي، مقاوم للتآكل، ومطابق لمعايير التعقيم المتكررة داخل العيادات.</p>
-    </div>
-  </div>
-</section>
-
-<div class="ruler-strip"></div>
-
-<section id="catalog">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>الكتالوج الكامل</h2>
-        <div class="sub">أدوات أساسية لعيادتك، بمواصفات استانلس ستيل وجاهزة للتعقيم — يمكن تحديثها وإدارتها بالكامل من لوحة التحكم.</div>
-      </div>
-    </div>
-    <div class="grid" id="productGrid"></div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="custom-note">
-      <div class="icon-box">🏷️</div>
-      <div>
-        <h3>الميداليات بتُحفر حسب طلبك</h3>
-        <p>اسم العيادة، اسم الشركة، أو رقم التواصل — بتتكتب على الميدالية زي ما تحب. متاحة استانلس أو بلاستيك. ابعت التصميم اللي عايزه على واتساب ونظبطهولك.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="bulk-banner">
-      <div class="bulk-icon">📦</div>
-      <div>
-        <h2>أسعار خاصة مع الكميات</h2>
-        <p>كل ما تزيد الكمية اللي بتطلبها، كل ما السعر يبقى أفضل بالنسبالك. تواصل معنا على واتساب وقولنا احتياجك، وهنرد عليك بأنسب سعر وعرض يناسب طلبك سواء لعيادتك أو لو موزّع/شركة مستلزمات أسنان.</p>
-      </div>
-      <a class="btn btn-outline" href="https://wa.me/201282175854?text=عايز أعرف سعر الكمية" target="_blank" rel="noopener">اسأل عن سعر الكمية</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">DentCraft</div>
-        <p>أدوات أسنان استانلس مصنوعة بعناية، من ورشة مصرية صغيرة لعيادات وشركات مستلزمات الأسنان.</p>
-      </div>
-      <div class="contact-list">
-        <a href="https://wa.me/201282175854" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4C8.4 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-          01282175854 (واتساب)
-        </a>
-        <a href="tel:01062183539">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
-          01062183539
-        </a>
-      </div>
-    </div>
-    <div class="copyright">DentCraft © 2026 — صناعة مصرية بمعايير استانلس ستيل طبي</div>
-  </div>
-</footer>
-
-<button id="adminToggle" title="لوحة الإدارة">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09A1.65 1.65 0 0015 4.6a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+<button id="adel-launch" class="pulse" aria-label="كلّم عادل">
+  <div class="av"><div class="avh"></div><i class="dot"></i></div>
+  <span class="t">كلّم عادل 👋</span>
 </button>
 
-<div id="adminPanel">
-  <div class="admin-sheet">
-    <button class="admin-close" id="adminClose">×</button>
-    <h3>لوحة تحكم المنتجات</h3>
-    <div class="hint">
-      عدّل الاسم / السعر / الوصف / الصورة لأي منتج، أضف منتجات جديدة أو احذف اللي مش محتاجه، وفي الآخر اضغط <b>"حفظ كل التعديلات"</b>.
-      <br>⚠️ ملحوظة: التخزين حاليًا محلي في متصفحك فقط (localStorage) — التعديلات مش هتظهر تلقائيًا لباقي زوار الموقع من أجهزة تانية إلا لو ربطنا الموقع بقاعدة بيانات حقيقية زي Firebase. استخدم زر "تنزيل نسخة احتياطية" بانتظام عشان متفقدش بياناتك.
+<div id="adel-box">
+  <div id="adel-head">
+    <div class="big"><div class="avh"></div></div>
+    <div>
+      <h4>عادل محمد رفعت</h4>
+      <div class="st"><i></i> متصل الآن · DentCraft</div>
+      <div class="wave"><b></b><b></b><b></b><b></b></div>
     </div>
-    <div id="adminList"></div>
-    <button id="addProductBtn" class="btn btn-purple" style="width:100%; justify-content:center; margin-bottom:16px;">+ إضافة منتج جديد</button>
-    <div class="admin-actions">
-      <button id="saveAllBtn" class="btn btn-main">💾 حفظ كل التعديلات</button>
-      <button id="exportJsonBtn" class="btn btn-outline">⬇ تنزيل نسخة احتياطية (JSON)</button>
-      <label class="btn btn-outline" style="cursor:pointer;">
-        ⬆ استيراد نسخة احتياطية
-        <input type="file" accept="application/json" id="importFile" style="display:none;">
-      </label>
-      <button id="resetBtn" class="btn btn-danger">استرجاع الإعدادات الافتراضية</button>
+    <div class="hbtn">
+      <button id="adel-voice" title="الصوت">🔇</button>
+      <button id="adel-close" title="إغلاق">✕</button>
     </div>
   </div>
-</div>
-<div class="toast" id="toast"></div>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore, collection, addDoc, setDoc, deleteDoc, doc,
-  onSnapshot, query, orderBy, getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
- 
-const firebaseConfig = {
-  apiKey: "AIzaSyCbupJ1RmCvy_qpdUP-_EF0crvEuqxmrHY",
-  authDomain: "dentcraft2026.firebaseapp.com",
-  projectId: "dentcraft2026",
-  storageBucket: "dentcraft2026.firebasestorage.app",
-  messagingSenderId: "739393846233",
-  appId: "1:739393846233:web:cd14b3fcd97bfaff77b7c8"
-};
- 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const productsCol = collection(db, "products");
- 
-function ph(c1,c2,icon){
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
-    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/>
-    </linearGradient></defs>
-    <rect width="400" height="400" fill="url(#g)"/>
-    <text x="50%" y="54%" font-size="140" text-anchor="middle" dominant-baseline="middle">${icon}</text>
-  </svg>`;
-  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-}
- 
-const DEFAULT_PRODUCTS = [
-  {name:'\u0647\u0648\u0643 \u0623\u0628\u064a\u0643\u0633 (Apex Hook)', price:'17 \u062c', desc:'\u062e\u0637\u0627\u0641 \u062f\u0642\u064a\u0642 \u0644\u0642\u064a\u0627\u0633 \u0637\u0648\u0644 \u0627\u0644\u0642\u0646\u0627\u0629 \u0627\u0644\u062c\u0630\u0631\u064a\u0629 \u0623\u062b\u0646\u0627\u0621 \u0639\u0644\u0627\u062c \u0627\u0644\u0639\u0635\u0628\u060c \u0627\u0633\u062a\u0627\u0646\u0644\u0633 \u0633\u062a\u064a\u0644 \u0645\u0642\u0627\u0648\u0645 \u0644\u0644\u0635\u062f\u0623.', img: ph('#FF6B6B','#FFC93C','\ud83e\ude9d'), order:0},
-  {name:'\u0645\u0631\u0627\u064a\u0627 \u062a\u0635\u0648\u064a\u0631 (\u0645\u0646\u0641\u0631\u062f\u0629)', price:'45 \u062c', desc:'\u0645\u0631\u0627\u064a\u0627 \u0639\u0627\u0643\u0633\u0629 \u0644\u062a\u0635\u0648\u064a\u0631 \u0627\u0644\u0623\u0633\u0646\u0627\u0646 \u062f\u0627\u062e\u0644 \u0627\u0644\u0641\u0645 \u0628\u0632\u0648\u0627\u064a\u0627 \u0645\u062e\u062a\u0644\u0641\u0629\u060c \u0633\u0637\u062d \u0645\u0635\u0642\u0648\u0644 \u0628\u062f\u0631\u062c\u0629 \u0639\u0627\u0644\u064a\u0629.', img: ph('#00C2A8','#7C5CFC','\ud83e\ude9e'), order:1},
-  {name:'\u0637\u0642\u0645 \u0645\u0631\u0627\u064a\u0627 \u0643\u0627\u0645\u0644', price:'135 \u062c', desc:'\u0645\u062c\u0645\u0648\u0639\u0629 \u0645\u062a\u0643\u0627\u0645\u0644\u0629 \u0645\u0646 \u0645\u0631\u0627\u064a\u0627 \u0627\u0644\u062a\u0635\u0648\u064a\u0631 \u062f\u0627\u062e\u0644 \u0634\u0646\u0637\u0629 \u062c\u0644\u062f \u0623\u0646\u064a\u0642\u0629\u060c \u0645\u0631\u062a\u0628\u0629 \u0648\u062c\u0627\u0647\u0632\u0629 \u0644\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u064a\u0648\u0645\u064a.', img: ph('#7C5CFC','#FF8FB1','\ud83e\uddf0'), order:2},
-  {name:'\u0645\u0641\u062a\u0627\u062d \u0633\u0643\u064a\u0644\u0631 (Scaler Key)', price:'60 \u062c', desc:'\u0645\u0641\u062a\u0627\u062d \u0636\u0628\u0637 \u0631\u0623\u0633 \u062c\u0647\u0627\u0632 \u0627\u0644\u0633\u0643\u064a\u0644\u0631\u060c \u0645\u0639\u062a\u0645\u062f \u0644\u0644\u062a\u0639\u0642\u064a\u0645 \u062d\u062a\u0649 134\u00b0C.', img: ph('#FFC93C','#FF6B6B','\ud83d\udd27'), order:3},
-  {name:'\u062a\u0645\u0628\u0644\u062a \u0642\u064a\u0627\u0633 \u0627\u0644\u0623\u0633\u0646\u0627\u0646', price:'5 \u062c', desc:'\u0642\u0627\u0644\u0628 \u0644\u062a\u062d\u062f\u064a\u062f \u0645\u0648\u0627\u0636\u0639 \u0627\u0644\u0623\u0633\u0646\u0627\u0646 \u0627\u0644\u0639\u0644\u0648\u064a\u0629 \u0648\u0627\u0644\u0633\u0641\u0644\u064a\u0629 \u0628\u062f\u0642\u0629 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062a\u062e\u0637\u064a\u0637 \u0644\u0644\u0639\u0644\u0627\u062c.', img: ph('#00C2A8','#FFC93C','\ud83d\udcd0'), order:4},
-  {name:'\u0645\u064a\u062f\u0627\u0644\u064a\u0629 \u0643\u064a \u062a\u0634\u064a\u0646 \u0645\u062e\u0635\u0635\u0629', price:'25 / 15 \u062c', desc:'\u0645\u064a\u062f\u0627\u0644\u064a\u0629 \u0628\u0634\u0643\u0644 \u0627\u0644\u0633\u0646\u060c \u062a\u064f\u062d\u0641\u0631 \u0628\u0627\u0633\u0645 \u0627\u0644\u0639\u064a\u0627\u062f\u0629 \u0623\u0648 \u0627\u0644\u0634\u0631\u0643\u0629 \u062d\u0633\u0628 \u0627\u0644\u0637\u0644\u0628. \u0627\u0633\u062a\u0627\u0646\u0644\u0633 25 \u062c\u060c \u0628\u0644\u0627\u0633\u062a\u064a\u0643 15 \u062c.', img: ph('#FF8FB1','#7C5CFC','\ud83e\uddb7'), order:5},
-  {name:'\u0645\u0633\u0637\u0631\u0629 \u0642\u064a\u0627\u0633 \u0627\u0644\u0623\u0633\u0646\u0627\u0646 (mm)', price:'27 \u062c', desc:'\u0645\u0633\u0637\u0631\u0629 \u0627\u0633\u062a\u0627\u0646\u0644\u0633 \u0645\u062f\u0631\u0651\u062c\u0629 \u0628\u0627\u0644\u0645\u064a\u0644\u064a\u0645\u062a\u0631 \u0644\u0642\u064a\u0627\u0633 \u0623\u0628\u0639\u0627\u062f \u0627\u0644\u0623\u0633\u0646\u0627\u0646 \u0648\u0627\u0644\u062a\u064a\u062c\u0627\u0646 \u0628\u062f\u0642\u0629.', img: ph('#FF6B6B','#00C2A8','\ud83d\udccf'), order:6}
-];
- 
-const ADMIN_PASSWORD = 'dentcraft2026'; // \u063a\u064a\u0651\u0631\u0647\u0627 \u0644\u0643\u0644\u0645\u0629 \u0633\u0631 \u062e\u0627\u0635\u0629 \u0628\u064a\u0643
-const MAX_DOC_BYTES_APPROX = 700000; // \u0647\u0627\u0645\u0634 \u0623\u0645\u0627\u0646 \u062a\u062d\u062a \u062d\u062f \u0627\u0644\u0645\u064a\u062c\u0627 \u0628\u0627\u064a\u062a \u0644\u0643\u0644 \u0645\u0633\u062a\u0646\u062f \u0641\u064a Firestore
- 
-let PRODUCTS = [];
-let draft = null;
- 
-function escapeHTML(str){
-  return String(str ?? '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-}
-function escapeAttr(str){ return escapeHTML(str); }
-function cardColor(i){
-  const colors = ['#FF6B6B','#00C2A8','#FFC93C','#7C5CFC','#FF8FB1'];
-  return colors[i % colors.length];
-}
- 
-/* ---------- \u062a\u0635\u063a\u064a\u0631 \u0648\u0636\u063a\u0637 \u0627\u0644\u0635\u0648\u0631\u0629 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627 \u0642\u0628\u0644 \u0627\u0644\u062a\u062d\u0648\u064a\u0644 \u0644\u0640 base64 ---------- */
-function resizeImageFile(file, maxDim = 700, quality = 0.72){
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const reader = new FileReader();
-    reader.onload = e => { img.src = e.target.result; };
-    reader.onerror = reject;
-    img.onload = () => {
-      let { width, height } = img;
-      if(width > height && width > maxDim){
-        height = Math.round(height * (maxDim / width));
-        width = maxDim;
-      }else if(height > maxDim){
-        width = Math.round(width * (maxDim / height));
-        height = maxDim;
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = width; canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, width, height);
-      resolve(canvas.toDataURL('image/jpeg', quality));
-    };
-    img.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
- 
-async function seedIfEmpty(){
-  const snap = await getDocs(productsCol);
-  if(snap.empty){
-    for(const p of DEFAULT_PRODUCTS){
-      await addDoc(productsCol, p);
-    }
-  }
-}
- 
-/* ---------- \u0639\u0631\u0636 \u0627\u0644\u0643\u0631\u0648\u062a \u0641\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629 ---------- */
-function renderGrid(){
-  const grid = document.getElementById('productGrid');
-  if(!PRODUCTS.length){
-    grid.innerHTML = '<p class="empty-msg">\u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0646\u062a\u062c\u0627\u062a \u0645\u0639\u0631\u0648\u0636\u0629 \u062d\u0627\u0644\u064a\u064b\u0627.</p>';
-    return;
-  }
-  grid.innerHTML = PRODUCTS.map((p,i) => `
-    <div class="card" style="--card-color:${cardColor(i)}">
-      <div class="card-media">
-        <span class="price-tag">${escapeHTML(p.price)}</span>
-        <img src="${p.img}" alt="${escapeAttr(p.name)}" loading="lazy">
-      </div>
-      <div class="card-body">
-        <h3>${escapeHTML(p.name)}</h3>
-        <p>${escapeHTML(p.desc)}</p>
-        <div class="card-order">
-          <a class="order-link" href="https://wa.me/201282175854?text=${encodeURIComponent('\u0639\u0627\u064a\u0632 \u0623\u0637\u0644\u0628: '+p.name)}" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.5 7.8 9.3 7.3c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.5 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4C8.4 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-            \u0627\u0637\u0644\u0628 \u0627\u0644\u0622\u0646
-          </a>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
- 
-/* ---------- \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645 ---------- */
-function renderAdminList(){
-  const list = document.getElementById('adminList');
-  if(!draft.length){
-    list.innerHTML = '<p class="hint">\u0644\u0627 \u062a\u0648\u062c\u062f \u0645\u0646\u062a\u062c\u0627\u062a. \u0627\u0636\u063a\u0637 "\u0625\u0636\u0627\u0641\u0629 \u0645\u0646\u062a\u062c \u062c\u062f\u064a\u062f" \u0644\u0644\u0628\u062f\u0621.</p>';
-    return;
-  }
-  list.innerHTML = draft.map((p, idx) => `
-    <div class="admin-row" data-idx="${idx}">
-      <img class="admin-thumb" src="${p.img}">
-      <div class="admin-fields">
-        <input type="text" class="af-name" data-idx="${idx}" data-field="name" value="${escapeAttr(p.name)}" placeholder="\u0627\u0633\u0645 \u0627\u0644\u0645\u0646\u062a\u062c">
-        <input type="text" class="af-price" data-idx="${idx}" data-field="price" value="${escapeAttr(p.price)}" placeholder="\u0627\u0644\u0633\u0639\u0631 (\u0645\u062b\u0627\u0644: 45 \u062c)">
-        <textarea class="af-desc" data-idx="${idx}" data-field="desc" placeholder="\u0627\u0644\u0648\u0635\u0641">${escapeHTML(p.desc)}</textarea>
-        <label class="upload-btn">
-          \ud83d\uddbc \u062a\u063a\u064a\u064a\u0631 \u0627\u0644\u0635\u0648\u0631\u0629
-          <input type="file" accept="image/*" class="af-img" data-idx="${idx}">
-        </label>
-      </div>
-      <button class="admin-delete" data-idx="${idx}" title="\u062d\u0630\u0641 \u0627\u0644\u0645\u0646\u062a\u062c">\ud83d\uddd1</button>
-    </div>
-  `).join('');
- 
-  list.querySelectorAll('.af-name, .af-price, .af-desc').forEach(inp => {
-    inp.addEventListener('input', function(){
-      draft[+this.dataset.idx][this.dataset.field] = this.value;
-    });
-  });
- 
-  list.querySelectorAll('.af-img').forEach(inp => {
-    inp.addEventListener('change', async function(e){
-      const idx = +this.dataset.idx;
-      const file = e.target.files[0];
-      if(!file) return;
-      showToast('\u062c\u0627\u0631\u064a \u062a\u0635\u063a\u064a\u0631 \u0627\u0644\u0635\u0648\u0631\u0629...');
-      try{
-        const resizedDataUrl = await resizeImageFile(file);
-        draft[idx].img = resizedDataUrl;
-        const row = list.querySelectorAll('.admin-row')[idx];
-        if(row) row.querySelector('.admin-thumb').src = resizedDataUrl;
-        showToast('\u062a\u0645 \u062a\u062c\u0647\u064a\u0632 \u0627\u0644\u0635\u0648\u0631\u0629\u060c \u0645\u062a\u0646\u0633\u0627\u0634 \u062a\u0636\u063a\u0637 "\u062d\u0641\u0638" \u2705');
-      }catch(err){
-        console.error(err);
-        alert('\u062a\u0639\u0630\u0651\u0631 \u0645\u0639\u0627\u0644\u062c\u0629 \u0647\u0630\u0647 \u0627\u0644\u0635\u0648\u0631\u0629\u060c \u062c\u0631\u0628 \u0635\u0648\u0631\u0629 \u0623\u062e\u0631\u0649');
-      }
-    });
-  });
- 
-  list.querySelectorAll('.admin-delete').forEach(btn => {
-    btn.addEventListener('click', async function(){
-      const idx = +this.dataset.idx;
-      const p = draft[idx];
-      if(!confirm('\u0645\u062a\u0623\u0643\u062f \u0625\u0646\u0643 \u0639\u0627\u064a\u0632 \u062a\u062d\u0630\u0641 "'+p.name+'"\u061f')) return;
-      if(p.id){
-        try{ await deleteDoc(doc(db,'products',p.id)); }catch(e){ console.error(e); }
-      }
-      draft.splice(idx,1);
-      renderAdminList();
-      showToast('\u062a\u0645 \u062d\u0630\u0641 \u0627\u0644\u0645\u0646\u062a\u062c');
-    });
-  });
-}
- 
-function addNewProduct(){
-  draft.push({
-    name: '\u0645\u0646\u062a\u062c \u062c\u062f\u064a\u062f',
-    price: '0 \u062c',
-    desc: '\u0627\u0643\u062a\u0628 \u0648\u0635\u0641 \u0627\u0644\u0645\u0646\u062a\u062c \u0647\u0646\u0627...',
-    img: ph('#00C2A8','#FF6B6B','\ud83c\udd95'),
-    order: draft.length
-  });
-  renderAdminList();
-  const list = document.getElementById('adminList');
-  list.scrollTop = list.scrollHeight;
-}
- 
-async function saveAll(){
-  showToast('\u062c\u0627\u0631\u064a \u0627\u0644\u062d\u0641\u0638...');
-  try{
-    for(let i=0;i<draft.length;i++){
-      const p = draft[i];
-      if(p.img && p.img.length > MAX_DOC_BYTES_APPROX){
-        showToast('\u26a0\ufe0f \u0635\u0648\u0631\u0629 "'+p.name+'" \u0643\u0628\u064a\u0631\u0629 \u062c\u062f\u064b\u0627\u060c \u062c\u0631\u0628 \u0635\u0648\u0631\u0629 \u0623\u0635\u063a\u0631');
-        alert('\u0635\u0648\u0631\u0629 \u0627\u0644\u0645\u0646\u062a\u062c "'+p.name+'" \u0643\u0628\u064a\u0631\u0629 \u062c\u062f\u064b\u0627 \u0648\u0645\u0645\u0643\u0646 \u062a\u0641\u0634\u0644 \u0627\u0644\u062d\u0641\u0638. \u062c\u0631\u0628 \u062a\u0631\u0641\u0639\u0647\u0627 \u062a\u0627\u0646\u064a (\u0628\u064a\u062a\u0645 \u062a\u0635\u063a\u064a\u0631\u0647\u0627 \u062a\u0644\u0642\u0627\u0626\u064a\u064b\u0627) \u0623\u0648 \u0627\u0633\u062a\u062e\u062f\u0645 \u0635\u0648\u0631\u0629 \u0623\u0642\u0644 \u062f\u0642\u0629.');
-        return;
-      }
-      const data = { name:p.name, price:p.price, desc:p.desc, img:p.img, order: i };
-      if(p.id){
-        await setDoc(doc(db,'products',p.id), data, {merge:true});
-      }else{
-        const newRef = await addDoc(productsCol, data);
-        p.id = newRef.id;
-      }
-    }
-    showToast('\u062a\u0645 \u062d\u0641\u0638 \u0643\u0644 \u0627\u0644\u062a\u0639\u062f\u064a\u0644\u0627\u062a \u0628\u0646\u062c\u0627\u062d \u2705');
-  }catch(e){
-    console.error(e);
-    showToast('\u26a0\ufe0f \u062d\u0635\u0644 \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062d\u0641\u0638');
-    alert('\u062d\u0635\u0644 \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062d\u0641\u0638. \u062a\u0623\u0643\u062f \u0645\u0646 \u0627\u062a\u0635\u0627\u0644\u0643 \u0628\u0627\u0644\u0625\u0646\u062a\u0631\u0646\u062a \u0648\u0645\u0646 \u0642\u0648\u0627\u0639\u062f Firestore. \u0631\u0627\u062c\u0639 Console (F12) \u0644\u062a\u0641\u0627\u0635\u064a\u0644 \u0627\u0644\u062e\u0637\u0623.');
-  }
-}
- 
-async function resetDefaults(){
-  if(!confirm('\u0647\u064a\u062a\u0645 \u062d\u0630\u0641 \u0643\u0644 \u0627\u0644\u0645\u0646\u062a\u062c\u0627\u062a \u0627\u0644\u062d\u0627\u0644\u064a\u0629 \u0648\u0627\u0633\u062a\u0631\u062c\u0627\u0639 \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629\u060c \u0645\u062a\u0623\u0643\u062f\u061f')) return;
-  showToast('\u062c\u0627\u0631\u064a \u0627\u0644\u0627\u0633\u062a\u0631\u062c\u0627\u0639...');
-  try{
-    const snap = await getDocs(productsCol);
-    for(const d of snap.docs){ await deleteDoc(d.ref); }
-    for(const p of DEFAULT_PRODUCTS){ await addDoc(productsCol, p); }
-    showToast('\u062a\u0645 \u0627\u0633\u062a\u0631\u062c\u0627\u0639 \u0627\u0644\u0625\u0639\u062f\u0627\u062f\u0627\u062a \u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636\u064a\u0629');
-  }catch(e){
-    console.error(e);
-    showToast('\u26a0\ufe0f \u062d\u0635\u0644 \u062e\u0637\u0623');
-  }
-}
- 
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=> t.classList.remove('show'), 2400);
-}
- 
-/* ---------- \u0641\u062a\u062d/\u063a\u0644\u0642 \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645 \u0645\u0639 \u0628\u0627\u0633\u0648\u0631\u062f \u0628\u0633\u064a\u0637 ---------- */
-let adminUnlocked = sessionStorage.getItem('dc_admin_ok') === '1';
- 
-async function openAdmin(){
-  const snap = await getDocs(query(productsCol, orderBy('order')));
-  draft = snap.docs.map(d => ({id:d.id, ...d.data()}));
-  renderAdminList();
-  document.getElementById('adminPanel').classList.add('open');
-}
-function closeAdmin(){
-  document.getElementById('adminPanel').classList.remove('open');
-}
- 
-document.getElementById('adminToggle').addEventListener('click', () => {
-  if(!adminUnlocked){
-    const pass = prompt('\u0645\u0646 \u0641\u0636\u0644\u0643 \u0623\u062f\u062e\u0644 \u0643\u0644\u0645\u0629 \u0633\u0631 \u0644\u0648\u062d\u0629 \u0627\u0644\u062a\u062d\u0643\u0645:');
-    if(pass === null) return;
-    if(pass !== ADMIN_PASSWORD){
-      alert('\u0643\u0644\u0645\u0629 \u0627\u0644\u0633\u0631 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d\u0629');
-      return;
-    }
-    adminUnlocked = true;
-    sessionStorage.setItem('dc_admin_ok','1');
-  }
-  openAdmin();
-});
-document.getElementById('adminClose').addEventListener('click', closeAdmin);
-document.getElementById('adminPanel').addEventListener('click', (e)=>{
-  if(e.target.id === 'adminPanel') closeAdmin();
-});
-document.getElementById('addProductBtn').addEventListener('click', addNewProduct);
-document.getElementById('saveAllBtn').addEventListener('click', saveAll);
-document.getElementById('resetBtn').addEventListener('click', resetDefaults);
- 
-document.getElementById('exportJsonBtn').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(PRODUCTS, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'dentcraft-products-backup.json'; a.click();
-  URL.revokeObjectURL(url);
-  showToast('\u062c\u0627\u0631\u064a \u062a\u0646\u0632\u064a\u0644 \u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u0627\u062d\u062a\u064a\u0627\u0637\u064a\u0629...');
-});
- 
-document.getElementById('importFile').addEventListener('change', function(e){
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try{
-      const parsed = JSON.parse(ev.target.result);
-      if(Array.isArray(parsed)){
-        draft = parsed.map(p => ({...p}));
-        renderAdminList();
-        showToast('\u062a\u0645 \u0627\u0644\u0627\u0633\u062a\u064a\u0631\u0627\u062f\u060c \u0627\u0636\u063a\u0637 "\u062d\u0641\u0638" \u0644\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a');
-      }else{
-        alert('\u0645\u0644\u0641 \u063a\u064a\u0631 \u0635\u0627\u0644\u062d');
-      }
-    }catch(err){
-      alert('\u062a\u0639\u0630\u0651\u0631 \u0642\u0631\u0627\u0621\u0629 \u0627\u0644\u0645\u0644\u0641\u060c \u062a\u0623\u0643\u062f \u0625\u0646\u0647 \u0645\u0644\u0641 JSON \u0635\u062d\u064a\u062d');
-    }
-  };
-  reader.readAsText(file);
-  this.value = '';
-});
- 
-/* ---------- \u062a\u0634\u063a\u064a\u0644 \u0623\u0648\u0644\u064a ---------- */
-(async function init(){
-  await seedIfEmpty();
-  onSnapshot(query(productsCol, orderBy('order')), snap => {
-    PRODUCTS = snap.docs.map(d => ({id:d.id, ...d.data()}));
-    renderGrid();
-  });
-})();
-</script>
-<audio id="bgMusic" loop preload="auto">
-  <source src="welcome-music.mp3" type="audio/mpeg">
-</audio>
-
-<button id="soundToggle" aria-label="تشغيل الموسيقى" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: none;
-  background: #9CA3AF;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-">🎵</button>
-<script>
-(function () {
-  const music = document.getElementById('bgMusic');
-  const btn = document.getElementById('soundToggle');
-  music.volume = 0.35;
-
-  let isPlaying = false;
-
-btn.addEventListener('click', function () {
-    if (isPlaying) {
-      music.pause();
-      btn.style.background = '#9CA3AF';
-      btn.setAttribute('aria-label', 'تشغيل الموسيقى');
-    } else {
-      music.play().catch(() => {});
-      btn.style.background = '#0f766e';
-      btn.setAttribute('aria-label', 'إيقاف الموسيقى');
-    }
-    isPlaying = !isPlaying;
-  });
-
-  const clickSound = new Audio('click.mp3');
-  clickSound.volume = 0.4;
-
-  document.querySelectorAll('a, button').forEach(function (el) {
-    el.addEventListener('click', function () {
-      clickSound.currentTime = 0;
-      clickSound.play().catch(() => {});
-    });
-  });
-})();
-</script>
-  <!-- شات عادل -->
-<style>
-  #adel-btn{position:fixed;bottom:84px;right:20px;width:52px;height:52px;border-radius:50%;
-    background:var(--grad-purple,#7C5CFC);color:#fff;font-size:24px;border:none;cursor:pointer;
-    box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:9999}
-  #adel-box{position:fixed;bottom:148px;right:20px;width:340px;max-width:calc(100vw - 40px);
-    height:460px;max-height:calc(100vh - 170px);background:#fff;border-radius:18px;
-    box-shadow:0 12px 35px rgba(40,50,90,.28);display:none;flex-direction:column;
-    overflow:hidden;z-index:9999;font-family:'Cairo',Tahoma,sans-serif;direction:rtl}
-  #adel-head{background:var(--grad-purple,#7C5CFC);color:#fff;padding:12px 16px;font-weight:700}
-  #adel-msgs{flex:1;overflow-y:auto;padding:12px;background:#F0F3FF}
-  .adel-m{max-width:82%;padding:8px 12px;border-radius:14px;margin-bottom:8px;
-    line-height:1.6;font-size:14px;white-space:pre-wrap}
-  .adel-user{background:#7C5CFC;color:#fff;margin-right:0;margin-left:auto}
-  .adel-bot{background:#fff;color:#1E2749;border:1px solid #E4E7F5;margin-left:0;margin-right:auto}
-  #adel-form{display:flex;border-top:1px solid #E4E7F5}
-  #adel-input{flex:1;border:none;padding:12px;font-size:14px;outline:none;direction:rtl;font-family:inherit}
-  #adel-send{border:none;background:#7C5CFC;color:#fff;padding:0 18px;cursor:pointer;
-    font-size:14px;font-family:inherit;font-weight:700}
-</style>
-
-<button id="adel-btn" aria-label="اسأل عادل">💬</button>
-<div id="adel-box">
-  <div id="adel-head">اسأل عادل 👋</div>
   <div id="adel-msgs"></div>
+  <div id="adel-chips">
+    <button>الأسعار 💰</button>
+    <button>عايز أطلب منتجات 📦</button>
+    <button>خدماتك الرقمية 💻</button>
+  </div>
   <div id="adel-form">
+    <button id="adel-mic" title="اتكلم">🎤</button>
     <input id="adel-input" placeholder="اكتب رسالتك..." autocomplete="off">
-    <button id="adel-send">إرسال</button>
+    <button id="adel-send">➤</button>
   </div>
 </div>
 
 <script>
 (function () {
   var WORKER_URL = "https://adel-bot.tlgeee3.workers.dev";
-  var btn = document.getElementById("adel-btn");
-  var box = document.getElementById("adel-box");
-  var msgs = document.getElementById("adel-msgs");
-  var input = document.getElementById("adel-input");
-  var send = document.getElementById("adel-send");
-  var history = [];
-  var busy = false;
+  var PHOTO = "adel.jpg";
 
+  var $ = function (id) { return document.getElementById(id); };
+  var launch = $("adel-launch"), box = $("adel-box"), head = $("adel-head"),
+      msgs = $("adel-msgs"), input = $("adel-input"), chips = $("adel-chips");
+  var history = [], busy = false, voiceOn = false;
+
+  /* ---------- شخصية كاريكاتير احتياطية لو الصورة مش موجودة ---------- */
+  var CARTOON = '<svg class="adel-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">' +
+    '<rect width="100" height="100" fill="#E6E9FF"/>' +
+    '<path d="M12 100c2-24 18-32 38-32s36 8 38 32z" fill="#1E2749"/>' +
+    '<path d="M42 68l8 12 8-12z" fill="#fff"/>' +
+    '<rect x="44" y="56" width="12" height="14" rx="5" fill="#E8B48C"/>' +
+    '<ellipse cx="50" cy="40" rx="20" ry="23" fill="#F2C29B"/>' +
+    '<path d="M29 38c0-18 12-24 21-24s21 6 21 24c-4-9-10-13-21-13s-17 4-21 13z" fill="#2B2118"/>' +
+    '<circle cx="42" cy="40" r="2.6" fill="#2B2118"/><circle cx="58" cy="40" r="2.6" fill="#2B2118"/>' +
+    '<path d="M37 35q5-3 9 0M54 35q5-3 9 0" stroke="#2B2118" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+    '<path d="M32 48c3 14 11 19 18 19s15-5 18-19c-4 6-10 8-18 8s-14-2-18-8z" fill="#3A2C20"/>' +
+    '<ellipse class="mouth" cx="50" cy="55" rx="5" ry="2.6" fill="#7A1F2B"/></svg>';
+
+  function mountAvatars() {
+    var holders = document.querySelectorAll(".avh");
+    holders.forEach(function (h) {
+      var img = new Image();
+      img.onload = function () { h.replaceWith(img); };
+      img.onerror = function () { h.outerHTML = CARTOON; };
+      img.alt = "عادل";
+      img.src = PHOTO;
+      img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block";
+    });
+  }
+  mountAvatars();
+
+  /* ---------- الصوت ---------- */
+  function pickVoice() {
+    var vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    return vs.find(function (v) { return /ar-EG/i.test(v.lang); }) ||
+           vs.find(function (v) { return /^ar/i.test(v.lang); }) || null;
+  }
+  function speak(text) {
+    if (!voiceOn || !window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text.replace(/[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/gu, ""));
+    u.lang = "ar-EG"; u.rate = 1;
+    var v = pickVoice(); if (v) u.voice = v;
+    u.onstart = function () { head.classList.add("speaking"); };
+    u.onend = u.onerror = function () { head.classList.remove("speaking"); };
+    speechSynthesis.speak(u);
+  }
+  $("adel-voice").onclick = function () {
+    voiceOn = !voiceOn;
+    this.textContent = voiceOn ? "🔊" : "🔇";
+    if (!voiceOn && window.speechSynthesis) { speechSynthesis.cancel(); head.classList.remove("speaking"); }
+  };
+
+  /* ---------- الرسائل ---------- */
   function add(role, text) {
     var d = document.createElement("div");
     d.className = "adel-m " + (role === "user" ? "adel-user" : "adel-bot");
@@ -876,22 +167,25 @@ btn.addEventListener('click', function () {
     msgs.scrollTop = msgs.scrollHeight;
     return d;
   }
+  function typing() {
+    var d = document.createElement("div");
+    d.className = "adel-m adel-bot adel-typing";
+    d.innerHTML = "<span></span><span></span><span></span>";
+    msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }
 
-  add("bot", "أهلاً يا فندم 👋 أنا النسخة الرقمية من عادل. تحب أساعدك في إيه؟");
+  var GREETING = "أهلاً يا فندم 👋 أنا عادل. تحب أساعدك في إيه؟";
+  add("bot", GREETING);
 
-  btn.onclick = function () {
-    box.style.display = box.style.display === "flex" ? "none" : "flex";
-    if (box.style.display === "flex") input.focus();
-  };
-
-  async function submit() {
-    var text = input.value.trim();
+  async function submit(textOverride) {
+    var text = (textOverride || input.value).trim();
     if (!text || busy) return;
-    busy = true;
-    input.value = "";
+    busy = true; input.value = "";
+    chips.style.display = "none";
     add("user", text);
     history.push({ role: "user", text: text });
-    var wait = add("bot", "بكتب...");
+    var wait = typing(), reply;
     try {
       var res = await fetch(WORKER_URL, {
         method: "POST",
@@ -899,15 +193,46 @@ btn.addEventListener('click', function () {
         body: JSON.stringify({ messages: history })
       });
       var data = await res.json();
-      wait.textContent = data.reply;
-      history.push({ role: "bot", text: data.reply });
+      reply = data.reply;
     } catch (e) {
-      wait.textContent = "حصلت مشكلة، جرب تاني أو ابعتلي على الواتساب 01282175854";
+      reply = "حصلت مشكلة، ابعتلي على الواتساب 01282175854 وهرد عليك.";
     }
+    wait.remove();
+    add("bot", reply);
+    history.push({ role: "bot", text: reply });
+    speak(reply);
     busy = false;
   }
 
-  send.onclick = submit;
+  /* ---------- فتح / قفل ---------- */
+  function open() {
+    box.style.display = "flex"; launch.classList.remove("pulse"); input.focus();
+  }
+  function close() {
+    box.style.display = "none";
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    head.classList.remove("speaking");
+  }
+  launch.onclick = function () { box.style.display === "flex" ? close() : open(); };
+  $("adel-close").onclick = close;
+
+  $("adel-send").onclick = function () { submit(); };
   input.addEventListener("keydown", function (e) { if (e.key === "Enter") submit(); });
+  chips.querySelectorAll("button").forEach(function (b) {
+    b.onclick = function () { submit(b.textContent.replace(/[^\u0600-\u06FF\s]/g, "").trim()); };
+  });
+
+  /* ---------- الكلام بالصوت ---------- */
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition, mic = $("adel-mic");
+  if (!SR) { mic.style.display = "none"; }
+  else {
+    var rec = new SR(); rec.lang = "ar-EG"; rec.interimResults = false;
+    rec.onresult = function (e) { voiceOn = true; $("adel-voice").textContent = "🔊"; submit(e.results[0][0].transcript); };
+    rec.onend = function () { mic.classList.remove("on"); };
+    mic.onclick = function () {
+      if (mic.classList.contains("on")) { rec.stop(); return; }
+      try { rec.start(); mic.classList.add("on"); } catch (e) {}
+    };
+  }
 })();
 </script>
